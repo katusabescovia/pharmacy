@@ -1,0 +1,108 @@
+{% extends 'pharmacyapp/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+  h4 {
+    font-family: sans-serif;
+    color: #0C356A;
+    text-shadow: 2px 2px 4px #000000;
+    margin-left: 533px;
+    margin-top: 98px;
+  }
+
+  .container {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  form {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 75px;
+    border: 5px solid rgba(0, 128, 255, 0.2);
+    box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 25px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 16px;
+    border: 2px solid rgba(0, 128, 255, 0.2);
+    box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  button[type="submit"] {
+    margin-top: 17px;
+    background-color: #0c356a;
+    color: white;
+    border: none;
+    width: 110%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    max-width: 200px;
+    height: 40px;
+    padding: 10px;
+    transition: background-color 0.8s, color 0.7s;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #094f9f;
+  }
+  body{background-color:  rgb(13, 192, 192);}
+
+  @media (max-width: 768px) {
+    h4 {
+      margin-left: 0;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .container {
+      width: 80%;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      width: 95%;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+    }
+  }
+</style>
+
+<h4>ADD TO STOCK</h4>
+<hr />
+<div class="container">
+  <form method="POST" action="">
+    {% csrf_token %} {{ form|crispy }}
+    <button type="submit" class="btn" style="color: white">Add</button>
+  </form>
+</div>
+<br /><br />
+{% endblock %}

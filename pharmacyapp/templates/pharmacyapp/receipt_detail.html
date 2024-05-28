@@ -1,0 +1,76 @@
+{% extends 'pharmacyapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.card-header{font-family: sans-serif;}
+
+
+button {
+    background-color: #0c356a;
+}
+
+.btn-primary {
+    background-color: #094f9f;
+}
+
+.btn {
+    background-color: #0c356a;
+    color: white;
+    transition: background-color 0.7s;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.btn:hover {
+    background-color: #094f9f; /* Change to a darker shade for hover */
+}
+body{background-color:  rgb(13, 192, 192);}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="margin:auto; width:60%; margin-top:80px; font-family:sans-serif;">
+                <div class="card-header">
+                    <h5 class="" style="font-weight:bold;">Divine Touch, Kabalagala</h5>
+                    <p class="">Kampala, Uganda</p>
+                    <p class="">Contact us: +256789728298</p>
+                    <p class="">Date: {{ receipt.date_of_sale }}</p>
+                    <p class="">Receipt Number: DOLL-RECEIPT-0{{ receipt.id }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-right">Total Bill (Ugx)</th>
+                                    <th class="text-right">Amount Paid (Ugx)</th>
+                                    <th class="text-right">Amount Due (Ugx)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-family: sans-serif;">
+                                    <td>{{ receipt.name_of_the_item | title }}</td>
+                                    <td class="text-center">{{ receipt.quantity_sold }}</td>
+                                    <td class="text-right">Ugx {{ receipt.total_price}}</td>
+                                    <td class="text-right">Ugx {{ receipt.amount_received }}</td>
+                                    <td class="text-right">Ugx {{ receipt.change }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-center" style="font-family: sans-serif;"><em>Thank you for choosing Divine Touch</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'item'  %}"  class="hover-button"><input type= "submit" value="Go back" class="btn btn-primary" style="margin-bottom:20px;" type="button"/></a>
+</div>
+
+</div>
+{% endblock %}
