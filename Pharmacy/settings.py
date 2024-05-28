@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'pharmacyapp',
     'crispy_forms',
     'crispy_bootstrap4',
-    'bootstrap5',
+    # 'bootstrap5',
 ]
 
 MIDDLEWARE = [
