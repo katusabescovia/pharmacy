@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine touch</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            text-align: left;
+            position: relative;
+            overflow: auto;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .daycare-image {
+            width: 100%;
+            height: auto;
+            opacity: 0.6;
+        }
+
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            width: 120px;
+            height: auto;
+        }
+
+        .tagline {
+            position: absolute;
+            top: 40%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 2;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            max-width: 80%;
+        }
+
+        .about-text {
+            margin: 50px auto;
+            max-width: 800px;
+            color: #555;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .learn-more-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #FF6F61;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 20px;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .learn-more-button:hover {
+            background-color: #F4473D;
+        }
+
+
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <img src="../static/images/divine.jpg" alt="Divinetouch Image" class="daycare-image">
+        <div class="overlay"></div>
+        <img src="../static/images/logo.jpg" alt="Little Stars Logo" class="logo" style=" border-radius:50%;"><br><br><br>
+        <div class="tagline">
+            <h1 style="color:#F4473D;">Welcome to Divine Touch</h1>Where Your health is priority
+            <p>"Experience seamless healthcare management<br><br>
+                 with our clinic app – your health, our commitment."</p><br>
+            <a href="{% url 'login' %}" class="learn-more-button">Get Started</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2024 Divine touch medical clinic. All rights reserved.
+    </footer>
+
+</body>
+
+</html> 
+
+

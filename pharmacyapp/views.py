@@ -1,4 +1,15 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render
+from django.contrib.auth import login
+
+# Create your views here.
+def index(request):
+    return render(request,'pharmacyapp/index.html')
+
+
+def base(request):
+    return render(request,'pharmacyapp/base.html')
+# def index(request):
+#     return render(request,'pharmacyapp/index.html')from django.shortcuts import render,redirect,get_object_or_404
 from django .contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect

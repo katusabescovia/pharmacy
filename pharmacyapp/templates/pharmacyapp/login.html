@@ -1,0 +1,95 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(13, 192, 192);
+    }
+
+    .container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(175, 199, 207);
+        padding: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .footer {
+        background-color: rgba(7, 7, 7, 0.05);
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        font-weight: 900;
+    }
+
+    .login-form {
+        background-color: #ddeedf;
+        padding: 20px;
+        border-radius: 5px;
+        width: 25%;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #deede0;
+        color: black;
+        filter: blur(0.5px);
+    }
+
+    h2 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .form-group{
+        margin-bottom: 20px;
+    }
+
+    #id_username{
+        height: 12%;
+        border-radius: 5px;
+        border: 2px solid black;
+    }
+    #id_password{
+        height: 12%;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container">
+
+    <form method="post" class="login-form">
+        <h2>ADMIN LOGIN</h2><hr><br>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button type="submit" class="btn btn-primary"
+            style="border-radius: 10px; width: 60%; background-color:rgb(32, 106, 130); border:none; color: white;  height: 13%; margin-bottom: 15px;">Sign
+            In</button>
+        <br><br>
+
+    </form>
+
+</div>
+
+<footer class="footer">
+    © 2024 Divine touch medical clinic. All rights reserved.
+</footer>
+
+
+{% endblock %}
