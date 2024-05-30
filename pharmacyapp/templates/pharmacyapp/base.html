@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Pharmacy App</title>
-    <link rel = "stylesheet" href = {% static 'css/main.css'%}>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
      <!-- Raleway font -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway"
@@ -29,19 +30,25 @@
           <ul class="nav navbar-nav ml-auto">
            {% if user.is_authenticated%}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">HOME</a>
+                <a class="nav-link" href="/home">HOME</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/receipt">RECEIPTS</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="/item">PRODUCTS IN STOCK </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="/all_sales">ALL SALES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/clearance">CLEARANCE</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">SERVICES</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">LOGOUT</a>
+                <a class="nav-link" href="/logout/">LOGOUT</a>
               </li>
             {% endif %}
           </ul>

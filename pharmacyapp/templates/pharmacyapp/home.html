@@ -1,0 +1,164 @@
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Pharmacy App</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+     <!-- Raleway font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
+    <!-- Montserrat font -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <style>
+        .content{
+          margin-top:5rem;
+        }
+          .babies{
+              display: grid;
+              margin: auto;
+              flex-direction: row;
+              padding: 1rem;
+              border-radius: 15px;
+              background-color: rgb(158, 155, 155);
+              box-shadow: 0 11px 34px 0 rgba(0, 0, 0, 0.2);
+            }
+            
+            .babies h2{color: white;
+              font-weight: 700;
+              font-size: 30px;
+              text-transform: uppercase;
+              margin-top: 1rem;
+            }
+      
+            .frame th {
+              background-color: #0c356a;
+              color:white;
+          }
+          .table-container {
+              box-shadow: 1px 0px 20px -1px rgba(0,0,0,0.65);
+              overflow-x: auto;
+              max-width: 100%;
+              border-radius: i5px;
+              background-color: white;
+              border-radius: 15px;
+              font-family:sans-serif;
+          
+            
+            }
+           
+          
+       </style>
+      
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark "> 
+        <a class="nav-link" href=""><h1 class="navbar-brand" style = "font-size: 25px">DR. Daniel Opio</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="nav navbar-nav ml-auto">
+           {% if user.is_authenticated%}
+              <li class="nav-item">
+                <a class="nav-link" href="/home">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/receipt">RECEIPTS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/item">PRODUCTS IN STOCK </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/all_sales">ALL SALES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/clearance">CLEARANCE</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">SERVICES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout/">LOGOUT</a>
+              </li>
+            {% endif %}
+          </ul>
+     </nav>
+     <div class="container content">
+        <div class="row">
+        <div class="babies col-md-2 d-md-block mt-5">
+            <h2 class="text-center baby"> {{total_expenses}}</h2> <hr>
+            <h5 class= "text-center">
+              <strong> Expenses</strong>
+            </h5>
+        </div>
+    
+        <div class="babies col-md-2 d-md-block mt-5">
+            <h2 class="text-center baby">{{total_amountpaid}}</h2> <hr>
+            <h5 class= "text-center">
+              <strong>Sales  </strong>
+            </h5>
+        </div>
+    
+          <div class="babies col-md-2 d-md-block mt-5">
+            <h2 class="text-center baby">{{ total_debt}}</h2> <hr>
+            <h5 class= "text-center">
+              <strong>All Debted Issued </strong>
+            </h5>
+        </div>
+        </div>  
+        <hr>
+    </div>
+      <div class="container content">
+      <div class="table-container">
+    
+      <table  id="dataTable" class="table table-stripped table-hover">
+        <caption class="caption-top text-center"><h4>Recent Customers </h4></caption>
+          <thead  class="frame text-center" >
+              <tr>
+                 <th scope="col" class="project-h1">Name of the Customer</th>
+                  <th scope="col" class="project-h1">Item Bought</th>
+                  <th scope="col" class="project-h1">Quantity Bought</th>
+                  <th scope="col" class="project-h1">Amount Paid </th>
+                  
+              </tr>
+          </thead>
+          {% for customer in recent_customers %}
+          <tbody>
+              <tr style="font-family: sans-serif; text-align:center;">
+                <td>{{customer.payee}}</td>
+                <td>{{customer.name_of_the_item | title}}</td>
+                  <td>{{customer.quantity_sold}}</td>
+                  <td>{{customer.amount_received}}</td>
+                
+        
+              </tr>
+    
+                
+          </tbody>
+          {% endfor %}
+      </table>
+      </div>
+    </div>
+    </div>
+    
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+
+

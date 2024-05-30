@@ -5,6 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login,logout
+from django.shortcuts import redirect
+from django.contrib.auth import logout as auth_logout
+from django.db.models import Sum
+
+
 from .forms import *
 from .models import *
 from django.contrib.postgres.search import SearchQuery, SearchVector
@@ -100,4 +105,34 @@ def itemdelete(request,pk):
     return render(request, 'itemdelete.html', {'item': item})   
     
    
+def clearance(request):   
+    itemsale=Clearance.objects.all().order_by('id')
+    items=ClearanceFilter(request.GET,queryset=itemsale)
+    itemsale=items.qs
+    return render(request,'pharmacyapp/clearance.html',{'items':items,'itemsale':itemsale})
+
+def clearanceadd(request):
+    if request.method == 'POST':
+        form=Clearanceforms(request.POST)
+        if form.is_valid():
+            form.save()
+            print(form)
+            return redirect('clearance')
+    else:
+        form=Clearanceforms()    
+    return render(request,'pharmacyapp/clearanceadd.html',{'form':form})
+def logout(request):
+    auth_logout(request)
+    return redirect('/')
+
+def home(request):
+    recent_customers=Salerecord.objects.all()[:3]
+    count_amountpaid = Salerecord.objects.aggregate(Sum('amount_received'))
+    total_amountpaid=count_amountpaid.get('amount_received__sum',0)
+    total_expenses = Divine.total_expenses()
+    total_debt=Salerecord.total_debt()
     
+    context={'recent_customers':recent_customers,'total_amountpaid':total_amountpaid,'total_expenses':total_expenses,'total_debt':total_debt}
+    return render(request,'pharmacyapp/home.html',context)
+
+

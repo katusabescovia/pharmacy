@@ -1,0 +1,154 @@
+{% extends 'pharmacyapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+ <style>
+    External CSS */
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .button-container a {
+        text-decoration: none;
+    }
+
+    /* Your existing inline CSS */
+    h4 {
+        color: #0C356A;
+        text-shadow: 2px 2px 4px #000000;
+        margin-left: 480px;
+        margin-top: 83px;
+    }
+
+    button {
+        background-color: #0c356a;
+    }
+
+    .btn-primary {
+        background-color: #094f9f;
+    }
+
+    .btn {
+        background-color: #0c356a;
+        color: white;
+        transition: background-color 0.7s;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+    }
+
+    .btn:hover {
+        background-color: #094f9f; /* Change to a darker shade for hover */
+    }
+   
+
+    input[type="text"] {
+        border: 4px solid rgba(0, 128, 255, 0.2);
+        box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s, box-shadow 0.3s;
+        border-radius: 4px;
+        padding:0.3rem 0;
+    } 
+    
+    input[type="text"]:focus {
+        border-color: rgba(0, 128, 255, 0.5);
+        box-shadow: 0 0 0.2rem rgba(0, 128, 255, 0.5);
+    }
+   
+    
+    .table-container {
+        box-shadow: 1px 0px 20px -1px rgba(0,0,0,0.65);
+        overflow-x: auto;
+        max-width: 100%;
+        border-radius: i5px;
+        background-color: white;
+        border-radius: 15px;
+        font-family:sans-serif;
+
+     
+      
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 450px;
+      }
+      .search form {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0; /* Remove default margin */
+      }.search form input[type="submit"] {
+        margin-left: 10px; /* Adjust spacing between input and button */
+        
+      }
+body{background-color:  rgb(13, 192, 192);}
+
+ </style>
+
+  
+
+    
+        <h4 style="text-transform: uppercase;" >Lists OF Cleared Clients</h4><hr>
+        <div class="search">
+        <form action="" method="GET"style="">
+            {{items.form}}<br>
+            <input type="submit" value=" Search by name" class="btn btn-primary" style="width:170px,border-"/>
+            </form>
+        </div>
+            
+         <div class="container"> 
+         <div class="button-container mb-3"style="margin-left:27px;" >
+            <a href="/clearanceadd" class="btn btn-primary">Add  Payments </a>
+
+        
+            
+        </div>
+    
+
+        <div class="table-container">
+
+<table  id= "dataTable" class="table table-stripped table-hover">
+    
+    <thead class="table-dark" style="text-align:center;">
+        <tr>
+            <th scope="col" class="project-h1" style="text-align:center;">Name of Client</th>
+            <th scope="col" class="project-h1" style="text-align:center;">Item name</th>
+            <th scope="col" class="project-h1" style="text-align:center;">Amount Paid</th>
+            <th scope="col" class="project-h1" style="text-align:center;">Clearance Date</th>
+            <th scope="col" class="project-h1" style="text-align:center;">Status</th>
+            <!-- <th scope="col" class="project-h1" >Detail</th> -->
+        </tr>  
+    </thead>
+    {% for product  in  itemsale %}
+    <tbody>
+        <tr style="font-family: sans-serif; text-align:center;" >
+            <td>{{product.Customers_name}}</td>
+            <td>{{product.name_of_the_item}}</td>
+             <td>UGX{{product.amount_paid}}</td>
+             <td>{{product.clearace_date}}</td>
+             <td> {{product.status}}</td>
+         
+           
+          
+        
+            <!-- <td>
+                <a href="{% url 'issue_item' pk=product.id %}" class="btn btn-primary">Issue item</a>
+                <a href="{% url 'add_to_stock' pk=product.id %}" class="btn btn-primary">Add to stock</a>
+                <form action="{% url 'itemdelete' pk=product.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td> -->
+            
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

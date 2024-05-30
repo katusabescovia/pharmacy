@@ -5,3 +5,4 @@ from . models import*
 admin.site.register(Category)
 admin.site.register(Salerecord)
 admin.site.register(Divine)
+admin.site.register(Clearance)

@@ -49,9 +49,10 @@ button {
   <table class="table" style="margin-top:40px;">
     <thead class="table-dark text-center">
       <tr>
-        <th scope="col">Total Amount Received</th>
-        <th scope="col">Total change Given</th>
+        <th scope="col">Total Amount Expected</th>
+        <th scope="col">Total Debts Issued</th>
         <th scope="col">Net Amount</th>
+      </tr>
       </tr>
     </thead>
     <tbody class="text-center">
@@ -73,6 +74,7 @@ button {
       <tr>
         <th scope="col">Customer's Name</th>
         <th scope="col">Item Bought</th>
+        <th scope="col">Date_of_sale</th>
         <th scope="col" >Quantity Bought</th>
         <th scope="col">Unit Price(UGX)</th>
         <th scope="col">Total Cost</th>
@@ -87,6 +89,7 @@ button {
         
         <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
         <td>{{sale.name_of_the_item | title}}</td>
+        <td>{{sale.date_of_sale}}</td>
         <td>{{sale.quantity_sold}}</td>
         <td>UGX{{sale.unit_price}}</td>
         <td>UGX{{sale.total_price}}</td>
