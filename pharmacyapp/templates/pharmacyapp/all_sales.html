@@ -3,21 +3,25 @@
 <br>
 
 <style>
-  h4{ color:#0C356A;
-    text-shadow: 2px 2px 4px #000000;
+  h4{ color:#01B9DD;
+    text-shadow: 2px 2px 4px white ;
 margin-left: 466px;
-font-family: sans-serif;
-margin-top:58px;}
-body{background-color:  rgb(13, 192, 192);}
+font-family: sans-serif;}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #BEBFC5;
+} 
+
 
 button {
-  background-color: #0c356a;
+  background-color:#F4473D;
 }
 .btn-primary {
-  background-color: #094f9f;
+  background-color:#FF6F61;
 }
 .btn {
-    background-color: #0c356a;
+    background-color:#FF6F61;
     color: white;
     transition: background-color 0.7s;
     text-decoration: none;
@@ -26,7 +30,7 @@ button {
 }
 
 .btn:hover {
-    background-color: #094f9f; /* Change to a darker shade for hover */
+    background-color: #F4473D; /* Change to a darker shade for hover */
 }
 
 .table-container{
@@ -40,6 +44,11 @@ button {
 
 
 }
+ .frame th{ 
+  background-color:  #01B9DD;
+  color: white;
+}
+
 </style>
 
   
@@ -47,7 +56,7 @@ button {
 <div class="container">
 <div class="table-container">
   <table class="table" style="margin-top:40px;">
-    <thead class="table-dark text-center">
+    <thead class="frame text-center">
       <tr>
         <th scope="col">Total Amount Expected</th>
         <th scope="col">Total Amount Received</th>
@@ -56,7 +65,7 @@ button {
       </tr>
       </tr>
     </thead>
-    <tbody class="text-center">
+    <tbody class="text-center" style="font-weight: bolder;">
       <tr>
         <td>UGX{{total_expected}}</td>
         <td>UGX{{total}}</td>
@@ -71,8 +80,8 @@ button {
 <br>
 <div class="container">
   <div class="table-container">
-  <table class=" table">
-    <thead class="table-dark">
+  <table class=" table" style="margin-top:40px;">
+    <thead class="frame">
       <tr>
         <th scope="col">Customer's Name</th>
         <th scope="col">Item Bought</th>
@@ -86,12 +95,12 @@ button {
       </tr>
     </thead>
     {% for sale in sales %}
-    <tbody>
+    <tbody style="font-weight: bolder; text-align:center;">
       <tr>
 
         
         <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
-        <td>{{ sale.name_of_the_item.name | title }}</td>
+        <td>{{ sale.name_of_the_item | title }}</td>
         <td>{{ sale.date_of_sale }}</td>
         <td>{{ sale.quantity_sold }}</td>
         <td>UGX{{ sale.Selling_price }}</td>

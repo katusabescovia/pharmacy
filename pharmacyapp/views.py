@@ -126,7 +126,7 @@ def clearanceadd(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
-
+@login_required
 def home(request):
     recent_customers=Salerecord.objects.all()[:3]
     count_amountpaid = Salerecord.objects.aggregate(Sum('amount_received'))

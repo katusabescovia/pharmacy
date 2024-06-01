@@ -85,8 +85,16 @@
         margin-left: 10px; /* Adjust spacing between input and button */
         
       }
-body{background-color:  rgb(13, 192, 192);}
-
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #BEBFC5;
+      } 
+.frame th{ 
+    background-color:  #01B9DD;
+    color: white;
+  }
+  
  </style>
 
   
@@ -111,9 +119,9 @@ body{background-color:  rgb(13, 192, 192);}
 
         <div class="table-container">
 
-<table  id= "dataTable" class="table table-stripped table-hover">
+<table  id= "dataTable" class="table table-stripped table-hover" style="margin-top:40px;">
     
-    <thead class="table-dark" style="text-align:center;">
+    <thead class="frame" style="text-align:center;">
         <tr>
             <th scope="col" class="project-h1" style="text-align:center;">Category</th>
             <th scope="col" class="project-h1" style="text-align:center;">Item name</th>
@@ -125,7 +133,7 @@ body{background-color:  rgb(13, 192, 192);}
     </thead>
     {% for product  in  item %}
     <tbody>
-        <tr style="font-family: sans-serif; text-align:center;" >
+        <tr style="font-family: sans-serif; text-align:center; font-weight:bolder;" >
             <td>{{product.Category_item }}</td>
             <td>{{product.item_name}}</td>
              <td>{{product.quantity}}</td>
