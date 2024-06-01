@@ -49,7 +49,8 @@ h3 ,h4{
             <p class="card-title mt-5">customer's Name: <span style="font-weight:bolder;"> {{ sale.payee | title }}</span></p>
             <p class="card-text">Item Name:  <span style="font-weight:bolder;">{{ sale.name_of_the_item }}</span></p>
             <p class="card-text">Amount Paid:<strong> UGX {{ sale.amount_received }}</strong></p>
-            <p class="card-text">Quantity: <strong>{{ sale.quantity_sold }}</strong></p>
+            <p class="card-text">Quantity: <strong>{{ sale.quantity_sold }}</strong></p
+            <p class="card-text">profit: <strong>{{ sale.profit }}</strong></p
             <h4 class="mb-1 text-center" >Total Price: UGX {{ sale.total_price }}</h4><hr>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <p class="card-text">Amount Due: UGX{{ sale.change }}</p>

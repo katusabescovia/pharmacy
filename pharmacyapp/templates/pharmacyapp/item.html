@@ -136,7 +136,7 @@ body{background-color:  rgb(13, 192, 192);}
           
         
             <td>
-                <a href="{% url 'issue_item' pk=product.id %}" class="btn btn-primary">Issue item</a>
+                <a href="{% url 'issue_item' pk=product.id %}" class="btn btn-primary">Sell item</a>
                 <a href="{% url 'add_to_stock' pk=product.id %}" class="btn btn-primary">Add to stock</a>
                 <form action="{% url 'itemdelete' pk=product.id %}" method="post" style="display: inline;">
                     {% csrf_token %}

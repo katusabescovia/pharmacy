@@ -66,10 +66,12 @@ def add_to_stock(request,pk):
     
 def all_sales(request):
     sales=Salerecord.objects.all()
+    total_expected=sum([items.total_price() for items in sales])
     total=sum([items.amount_received for items in sales])
     change=sum([items.change() for items in sales])
-    net=total-change
-    return render(request,'pharmacyapp/all_sales.html',{'sales':sales,'total':total,'change':change,'net':net})
+    net=total_expected-change
+    
+    return render(request,'pharmacyapp/all_sales.html',{'sales':sales,'total':total,'change':change,'net':net,'total_expected':total_expected})
 
 
 def issue_item(request,pk):
@@ -131,8 +133,9 @@ def home(request):
     total_amountpaid=count_amountpaid.get('amount_received__sum',0)
     total_expenses = Divine.total_expenses()
     total_debt=Salerecord.total_debt()
-    
-    context={'recent_customers':recent_customers,'total_amountpaid':total_amountpaid,'total_expenses':total_expenses,'total_debt':total_debt}
+    total_profits=Salerecord.total_profits()
+    context={'recent_customers':recent_customers,'total_amountpaid':total_amountpaid,'total_expenses':total_expenses,'total_debt':total_debt,'total_profits':total_profits}
     return render(request,'pharmacyapp/home.html',context)
 
-
+def services(request):
+    return render(request,'pharmacyapp/services.html')

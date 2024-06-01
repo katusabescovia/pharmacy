@@ -50,6 +50,7 @@ button {
     <thead class="table-dark text-center">
       <tr>
         <th scope="col">Total Amount Expected</th>
+        <th scope="col">Total Amount Received</th>
         <th scope="col">Total Debts Issued</th>
         <th scope="col">Net Amount</th>
       </tr>
@@ -57,6 +58,7 @@ button {
     </thead>
     <tbody class="text-center">
       <tr>
+        <td>UGX{{total_expected}}</td>
         <td>UGX{{total}}</td>
         <td>UGX{{change}}</td>
         <td>UGX{{net}}</td>
@@ -76,10 +78,11 @@ button {
         <th scope="col">Item Bought</th>
         <th scope="col">Date_of_sale</th>
         <th scope="col" >Quantity Bought</th>
-        <th scope="col">Unit Price(UGX)</th>
+        <th scope="col">Selling Price(UGX)</th>
         <th scope="col">Total Cost</th>
         <th scope="col">Amount Paid</th>
         <th scope="col">Customer's Debtor</th>
+        <th scope="col">Clearance_debt</th>
       </tr>
     </thead>
     {% for sale in sales %}
@@ -88,13 +91,14 @@ button {
 
         
         <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
-        <td>{{sale.name_of_the_item | title}}</td>
-        <td>{{sale.date_of_sale}}</td>
-        <td>{{sale.quantity_sold}}</td>
-        <td>UGX{{sale.unit_price}}</td>
-        <td>UGX{{sale.total_price}}</td>
-        <td>UGX{{sale.amount_received}}</td>
-        <td>UGX{{sale.change}}</td>
+        <td>{{ sale.name_of_the_item.name | title }}</td>
+        <td>{{ sale.date_of_sale }}</td>
+        <td>{{ sale.quantity_sold }}</td>
+        <td>UGX{{ sale.Selling_price }}</td>
+        <td>UGX{{ sale.total_price }}</td>
+        <td>UGX{{ sale.amount_received }}</td>
+        <td>UGX{{ sale.change }}</td>
+        <td>UGX{{ sale.clearing_debt }}</td>
       </tr>
     </tbody>
     {% endfor %}

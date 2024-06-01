@@ -13,16 +13,16 @@ class Addstock(ModelForm):
         fields =['received_quantity']  
 
 
-class Sellforms(ModelForm):
+class Sellforms( forms.ModelForm):
     class Meta:
         model = Salerecord 
-        fields =['name_of_the_item','payee','quantity_sold','amount_received','date_of_sale']  
+        fields =['name_of_the_item','payee','quantity_sold', 'Selling_price','amount_received','date_of_sale']  
 
         
 class Clearanceforms(ModelForm):
       class Meta:
           model = Clearance
-          fields =[ 'Customers_name','name_of_the_item', 'amount_paid','clearace_date','status']            
+          fields =[ 'Customers_name','name_of_the_item', 'amount_due','clearace_date','status']            
 
 
 

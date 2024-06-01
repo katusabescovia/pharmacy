@@ -1,0 +1,194 @@
+{% extends 'pharmacyapp/base.html' %}
+{% load static %}
+{% block content%}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  h1, h2 {
+    padding-left: 30px;
+  }
+
+  .d1, p {
+    font-size: 20px;
+    color: rgb(53, 1, 63);
+    padding-left: 30px;
+    padding-bottom: 15px;
+  }
+
+  .d1 li, .other-services li {
+    margin-bottom: 10px;
+  }
+
+  .other-services {
+    padding-top: 30px;
+    padding-left: 30px;
+  }
+
+  /* Media Queries for Responsive Design */
+  @media (max-width: 1200px) {
+    h1 {
+      font-size: 2em;
+    }
+
+    h2 {
+      font-size: 1.75em;
+    }
+
+    .d1, p, .other-services {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    h1, h2, .d1, p, .other-services {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .d1, p, .other-services {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    .d1, p, .other-services {
+      font-size: 16px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    h1 {
+      font-size: 1.5em;
+    }
+
+    h2 {
+      font-size: 1.25em;
+    }
+
+    .d1, p, .other-services {
+      font-size: 14px;
+    }
+  }
+
+  /* Navbar Styles */
+  .navbar-brand {
+    font-size: 25px;
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .navbar-nav .nav-item .nav-link {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .navbar-nav .nav-item .nav-link {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h1 id="h1">Pharmacy services</h1>
+    <p>The ageing of the population, technological advances, new public health threats, evolving patients' expectations and shrinking budget are putting pressure on health care systems in Europe and beyond. An increasing portion of health care expenditure is on pharmaceuticals and chronic diseases. All these factors are pushing for change. And community pharmacy is changing too to respond to these challenges and meet patients’ needs by shifting the focus from dispensing medicines and diseases to patient care and quality of services. Pharmacy services aim to achieve the ‘triple aim’:</p>
+    
+    <div class="d1">
+      <ul>
+        <li>Better quality of care</li>
+        <li>Better health outcome</li>
+        <li>Lower costs</li>
+      </ul>
+    </div>
+
+    <p>If we look at the main trends in pharmacy services we observe that the number of patient-centered services is increasing.</p>
+
+    <h2>Core <a style="color: rgb(53, 33, 33);" href="index.html">pharmacy</a> services are:</h2>
+    <div class="d1">
+      <ul>
+        <li>Dispensing (incl. repeat dispensing and homecare)</li>
+        <li>Compounding</li>
+        <li>Emergency care (incl. emergency contraception) and minor ailment management</li>
+        <li>Medication management (unit dose packaging, new medicines service, medicines use review)</li>
+      </ul>
+    </div>
+
+    <p>Over the past decade we are also seeing an increase in the number of advanced pharmaceutical care services offered to patients, such as:</p>
+    <div class="d1">
+      <ul>
+        <li><a style="color: rgb(53, 33, 33);" href="https://www.who.int/health-topics/vaccines-and-immunization#tab=tab_1">Vaccination</a></li>
+        <li>Smoking cessation</li>
+        <li>Measurement of blood pressure, cholesterol, glucose, weight</li>
+        <li>Chronic disease management</li>
+        <li>Early screening and testing</li>
+      </ul>
+    </div>
+
+    <h2>Other services offered:</h2>
+    <div class="other-services">
+      <ul>
+        <li>Drug prescription</li>
+        <li>Consultation</li>
+        <li>Counselling</li>
+        <li>Drugs sold in wholesale and retail-sale</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <nav id="navdown" class="navbar navbar-expand-lg navbar-dark">
+      <a class="nav-link" href="index.html"><h1 class="navbar-brand">About</h1></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'receipt' %}">RECEIPTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'all_sales' %}">ALL SALES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'services' %}">SERVICES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">LOGOUT</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </footer>
+</body>
+
+{% endblock %}

@@ -19,6 +19,7 @@ urlpatterns = [
     path('clearanceadd/', views.clearanceadd, name='clearanceaadd'),
     path('logout/', views.logout, name='logout'),
     path('home/', views.home, name='home'),
+    path('services/', views.services, name='services'),
     
 ]
 
