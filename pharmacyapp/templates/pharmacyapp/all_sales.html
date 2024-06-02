@@ -3,34 +3,28 @@
 <br>
 
 <style>
-  h4{ color:#01B9DD;
-    text-shadow: 2px 2px 4px white ;
-margin-left: 466px;
-font-family: sans-serif;}
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #BEBFC5;
-} 
-
-
+  h4{ color:#01b9dd;
+    font-weight: bold;
+    margin-left: 500px;
+  }
 button {
-  background-color:#F4473D;
+  background-color: #01b9dd;
 }
 .btn-primary {
-  background-color:#FF6F61;
+  background-color: #01b9dd;
 }
 .btn {
-    background-color:#FF6F61;
+    background-color: #01b9dd;
     color: white;
     transition: background-color 0.7s;
     text-decoration: none;
+    border: none;
     padding: 8px 16px;
     border-radius: 4px;
 }
 
 .btn:hover {
-    background-color: #F4473D; /* Change to a darker shade for hover */
+    background-color: #5093ab; /* Change to a darker shade for hover */
 }
 
 .table-container{
@@ -44,11 +38,6 @@ button {
 
 
 }
- .frame th{ 
-  background-color:  #01B9DD;
-  color: white;
-}
-
 </style>
 
   
@@ -56,7 +45,7 @@ button {
 <div class="container">
 <div class="table-container">
   <table class="table" style="margin-top:40px;">
-    <thead class="frame text-center">
+    <thead class="table-dark text-center" style="background-color: #5093ab;">
       <tr>
         <th scope="col">Total Amount Expected</th>
         <th scope="col">Total Amount Received</th>
@@ -65,7 +54,7 @@ button {
       </tr>
       </tr>
     </thead>
-    <tbody class="text-center" style="font-weight: bolder;">
+    <tbody class="text-center">
       <tr>
         <td>UGX{{total_expected}}</td>
         <td>UGX{{total}}</td>
@@ -81,7 +70,7 @@ button {
 <div class="container">
   <div class="table-container">
   <table class=" table" style="margin-top:40px;">
-    <thead class="frame">
+    <thead class="table-dark" style="background-color: #5093ab;">
       <tr>
         <th scope="col">Customer's Name</th>
         <th scope="col">Item Bought</th>
@@ -95,12 +84,12 @@ button {
       </tr>
     </thead>
     {% for sale in sales %}
-    <tbody style="font-weight: bolder; text-align:center;">
+    <tbody>
       <tr>
 
         
         <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
-        <td>{{ sale.name_of_the_item | title }}</td>
+        <td>{{ sale.name_of_the_item.name | title }}</td>
         <td>{{ sale.date_of_sale }}</td>
         <td>{{ sale.quantity_sold }}</td>
         <td>UGX{{ sale.Selling_price }}</td>
@@ -115,8 +104,8 @@ button {
 
 </div>
 
-<a href="{% url 'item'  %}"  class="hover-button "><input type= "submit" value="Go back" class="btn btn-primary mt-2" type="button"/></a>
 </div>
+<a href="{% url 'item'  %}"  class="hover-button ml-5 "><input type= "submit" value="Go back" class="btn btn-primary mt-2" type="button"/></a>
 </div>
 
 {% endblock%}

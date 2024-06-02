@@ -33,7 +33,7 @@
         }
 
         .footer {
-            background-color: #01B9DD;
+            background-color: #5093ab;
             text-align: center;
             padding: 20px;
             position: fixed;
@@ -42,19 +42,24 @@
             font-weight: 900;
             color: white;
         }
+        .asteriskField { color: red;}
 
         .login-form {
             background-color: white;
             padding: 30px;
-            border-radius: 5px;
+            border-radius: 10px;
             width: 25%;
             
         }
 
+        .login-form .requiredField .asteasteriskField {
+            color: red;
+        }
+
         button[type="submit"]:hover {
             background-color: #d8495c;
-            color: black;
             filter: blur(0.5px);
+            transform: scale(1.0, 1.0);
            
         }
 
@@ -65,16 +70,17 @@
         .form-group {
             margin-bottom: 20px;
             margin-left:30px;
+            color:#5093ab;
         }
         input{padding:10px;
-        border: 2px solid #BEBFC5;
+        border: 2px solid  #5093ab;
         width:15rem;
     }
 
         #id_username, #id_password {
             height: 12%;
             border-radius: 5px;
-            border: 2px solid  #BEBFC5;;
+            border: 2px solid   #5093ab;
         }
 
         /* Responsive Styles */
@@ -128,12 +134,12 @@
 
     <div class="container">
         <form method="POST" class="login-form">
-            <h2 style="text-align:center; color:#01B9DD;">ADMIN LOGIN</h2>
+            <h2 style="text-align:center; color:#5093ab;">ADMIN LOGIN</h2>
             <hr><br>
             {% csrf_token %}
             {{ form|crispy }}
             <br>
-            <button type="submit" class="btn btn-primary" style="border-radius: 10px; width: 16rem; background-color: #E63950; border: none; color: white; height: 13%; margin-bottom: 15px; margin-left:30px;padding:0.8rem 5rem; ">Sign In</button>
+            <button type="submit" class="btn btn-primary" style="border-radius: 10px; width: 16rem; background-color: #01b9dd; border: none; color: white; height: 13%; margin-bottom: 15px; margin-left:30px;padding:0.8rem 5rem; ">Sign In</button>
             <br><br>
         </form>
     </div>

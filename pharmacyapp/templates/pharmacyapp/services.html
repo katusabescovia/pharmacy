@@ -2,7 +2,6 @@
 {% load static %}
 {% block content%}
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
   body {
@@ -12,11 +11,12 @@
   }
 
   .container {
-    padding: 15px;
+    padding-top: 15px;
   }
 
-  h1, h2 {
+  h1, h2, h2 span {
     padding-left: 30px;
+    color: #01B9DD;
   }
 
   .d1, p {
@@ -31,7 +31,7 @@
   }
 
   .other-services {
-    padding-top: 30px;
+    padding-top: 20px;
     padding-left: 30px;
   }
 
@@ -128,7 +128,7 @@
 
     <p>If we look at the main trends in pharmacy services we observe that the number of patient-centered services is increasing.</p>
 
-    <h2>Core <a style="color: rgb(53, 33, 33);" href="index.html">pharmacy</a> services are:</h2>
+    <h2>Core<a style="color: rgb(53, 33, 33);" href="index"><span>pharmacy</span></a> services are:</h2>
     <div class="d1">
       <ul>
         <li>Dispensing (incl. repeat dispensing and homecare)</li>
@@ -160,35 +160,7 @@
     </div>
   </div>
 
-  <footer>
-    <nav id="navdown" class="navbar navbar-expand-lg navbar-dark">
-      <a class="nav-link" href="index.html"><h1 class="navbar-brand">About</h1></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="nav navbar-nav ml-auto">
-          {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'index' %}">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'receipt' %}">RECEIPTS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'all_sales' %}">ALL SALES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'services' %}">SERVICES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">LOGOUT</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
-  </footer>
+  
 </body>
 
 {% endblock %}

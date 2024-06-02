@@ -17,14 +17,17 @@
 
     /* Your existing inline CSS */
     h4 {
-        color: #0C356A;
-        text-shadow: 2px 2px 4px #000000;
+        color: #01B9DD;
+        font-size: 25px;
+        font-weight: bold;
+
         margin-left: 480px;
         margin-top: 83px;
     }
 
     button {
-        background-color: #0c356a;
+        border: none;
+        background-color: #01B9DD;
     }
 
     .btn-primary {
@@ -32,8 +35,9 @@
     }
 
     .btn {
-        background-color: #0c356a;
+        background-color: #01B9DD;
         color: white;
+        border: none;
         transition: background-color 0.7s;
         text-decoration: none;
         padding: 8px 16px;
@@ -41,7 +45,7 @@
     }
 
     .btn:hover {
-        background-color: #094f9f; /* Change to a darker shade for hover */
+        background-color: #5093ab; /* Change to a darker shade for hover */
     }
    
 
@@ -80,21 +84,25 @@
       .search form {
         display: flex;
         align-items: center;
-        margin-bottom: 0; /* Remove default margin */
-      }.search form input[type="submit"] {
+        margin-bottom: 0; 
+      }
+      .search form input[type="submit"] {
         margin-left: 10px; /* Adjust spacing between input and button */
         
       }
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #BEBFC5;
-      } 
-      .frame th{ 
-        background-color:  #01B9DD;
-        color: white;
-      }
       
+      select[name="Customers_name"] {
+        border: 4px solid  #5093ab;
+        box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s, box-shadow 0.3s;
+        border-radius: 4px;
+        padding:0.3rem 0;
+    } 
+    
+    select[name="Customers_name"] :focus {
+        border-color:  #BEBFC5;
+        box-shadow:  #BEBFC5;
+    }
 
  </style>
 
@@ -120,9 +128,9 @@
 
         <div class="table-container">
 
-<table  id= "dataTable" class="table table-stripped table-hover" style="margin-top:40px;">
+<table  id= "dataTable" class="table table-stripped table-hover" style="margin-top:40px ;">
     
-    <thead class="frame" style="text-align:center;">
+    <thead class="table-dark" style="text-align:center; background-color: #5093ab;">
         <tr>
             <th scope="col" class="project-h1" style="text-align:center;">Name of Client</th>
             <th scope="col" class="project-h1" style="text-align:center;">Item name</th>
@@ -134,7 +142,7 @@
     </thead>
     {% for product  in  itemsale %}
     <tbody>
-        <tr style="font-family: sans-serif; text-align:center; font-weight:bolder;" >
+        <tr style="font-family: sans-serif; text-align:center;" >
             <td>{{product.Customers_name}}</td>
             <td>{{product.name_of_the_item}}</td>
              <td>UGX{{product.amount_due}}</td>

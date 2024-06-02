@@ -17,8 +17,8 @@
 
     /* Your existing inline CSS */
     h4 {
-        color: #0C356A;
-        text-shadow: 2px 2px 4px #000000;
+        color: #01b9dd;
+        font-weight: bold;
         margin-left: 480px;
         margin-top: 83px;
     }
@@ -32,21 +32,22 @@
     }
 
     .btn {
-        background-color: #0c356a;
+        background-color: #01b9dd;
         color: white;
         transition: background-color 0.7s;
         text-decoration: none;
+        border: none;
         padding: 8px 16px;
         border-radius: 4px;
     }
 
     .btn:hover {
-        background-color: #094f9f; /* Change to a darker shade for hover */
+        background-color: #5093ab; /* Change to a darker shade for hover */
     }
    
 
     input[type="text"] {
-        border: 4px solid rgba(0, 128, 255, 0.2);
+        border: 4px solid  #5093ab;
         box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
         transition: border-color 0.3s, box-shadow 0.3s;
         border-radius: 4px;
@@ -85,16 +86,7 @@
         margin-left: 10px; /* Adjust spacing between input and button */
         
       }
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #BEBFC5;
-      } 
-.frame th{ 
-    background-color:  #01B9DD;
-    color: white;
-  }
-  
+
  </style>
 
   
@@ -119,9 +111,9 @@
 
         <div class="table-container">
 
-<table  id= "dataTable" class="table table-stripped table-hover" style="margin-top:40px;">
+<table  id= "dataTable" class="table table-stripped table-hover" style="margin-top: 40px;">
     
-    <thead class="frame" style="text-align:center;">
+    <thead class="table-dark" style="text-align:center; background-color: #5093ab;">
         <tr>
             <th scope="col" class="project-h1" style="text-align:center;">Category</th>
             <th scope="col" class="project-h1" style="text-align:center;">Item name</th>
@@ -133,7 +125,7 @@
     </thead>
     {% for product  in  item %}
     <tbody>
-        <tr style="font-family: sans-serif; text-align:center; font-weight:bolder;" >
+        <tr style="font-family: sans-serif; text-align:center;" >
             <td>{{product.Category_item }}</td>
             <td>{{product.item_name}}</td>
              <td>{{product.quantity}}</td>
