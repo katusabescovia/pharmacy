@@ -32,12 +32,12 @@ class Divine(models.Model):
         return total_expenses
 
 class Salerecord(models.Model):
-    name_of_the_item = models.ForeignKey(Divine, on_delete=models.CASCADE)
-    payee = models.CharField(max_length=100, null=True, blank=True)
+    name_of_the_item = models.ForeignKey(Divine, on_delete=models.CASCADE ,blank=True)
+    payee = models.CharField(max_length=100 , null=True,blank=True)
     quantity_sold = models.IntegerField(default=0, null=True, blank=True)
     Selling_price= models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
     amount_received = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
-    date_of_sale = models.DateField(default=timezone.now,null=True)
+    date_of_sale = models.DateField(default=timezone.now,null=True,blank=True)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
     amount_due = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, blank=True)
     

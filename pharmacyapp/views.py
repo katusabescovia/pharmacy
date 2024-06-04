@@ -139,3 +139,17 @@ def home(request):
 
 def services(request):
     return render(request,'pharmacyapp/services.html')
+
+
+def itemedit(request,pk):
+    item =get_object_or_404(Salerecord, id=pk)
+    if request.method == 'POST':
+        form=Sellforms(request.POST,instance=item)
+        if form.is_valid():
+            form.save()
+            print(form)
+            return redirect('all_sales')
+    else:
+        form=Sellforms(instance=item)
+
+    return render(request,'pharmacyapp/itemedit.html',{'form':form, 'item':item})

@@ -16,8 +16,9 @@ button {
 }
 
 .btn {
-    background-color: #0c356a;
+    background-color: #01b9dd;
     color: white;
+    border: none;
     transition: background-color 0.7s;
     text-decoration: none;
     padding: 8px 16px;
@@ -26,16 +27,17 @@ button {
 }
 
 .btn:hover {
-    background-color: #094f9f; /* Change to a darker shade for hover */
+    background-color: #5093ab; /* Change to a darker shade for hover */
 }
-body{background-color:  rgb(13, 192, 192);}
+
+p{font-weight: bolder;}
 </style>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card" style="margin:auto; width:60%; margin-top:80px; font-family:sans-serif;">
                 <div class="card-header">
-                    <h5 class="" style="font-weight:bold;">Divine Touch</h5>
+                    <h5 class="text-center" style="font-weight:bolder; color: #5093ab;">Divine Touch</h5>
                     <p class="">Iceme,Oyam, Uganda</p>
                     <p class="">Contact us: +256777037903</p>
                     <p class="">Date: {{ receipt.date_of_sale }}</p>
@@ -64,7 +66,7 @@ body{background-color:  rgb(13, 192, 192);}
                             </tbody>
                         </table>
                     </div>
-                    <p class="text-center" style="font-family: sans-serif;"><em>Thank you for choosing Divine Touch</em></p>
+                    <p class="text-center" style="font-family: sans-serif; color: #5093ab;"><em>Thank you for choosing Divine Touch</em></p>
                 </div>
             </div>
         </div>

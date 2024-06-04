@@ -9,17 +9,20 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('item/', views.item, name='item'),
     path('itemadd/', views.itemadd, name='itemadd'),
-    path('add_to_stock/<int:pk>/', views.add_to_stock, name='add_to_stock'),
+    path('add_to_stock/<str:pk>/', views.add_to_stock, name='add_to_stock'),
     path('all_sales/', views.all_sales, name='all_sales'),
-    path('issue_item/<int:pk>/', views.issue_item, name='issue_item'),
+    path('issue_item/<str:pk>/', views.issue_item, name='issue_item'),
     path('receipt/', views.receipt, name='receipt'),
     path('receipt_detail/<int:receipt_id>/', views.receipt_detail, name='receipt_detail'),
-    path('itemdelete/<int:pk>/', views.itemdelete, name='itemdelete'),
+    path('itemdelete/<str:pk>/', views.itemdelete, name='itemdelete'),
     path('clearance/', views.clearance, name='clearance'),
     path('clearanceadd/', views.clearanceadd, name='clearanceaadd'),
     path('logout/', views.logout, name='logout'),
     path('home/', views.home, name='home'),
     path('services/', views.services, name='services'),
+    path('itemedit/<str:pk>/', views.itemedit, name='itemedit'),
+
+    
     
 ]
 

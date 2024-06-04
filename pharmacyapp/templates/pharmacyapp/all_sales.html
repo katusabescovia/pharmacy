@@ -74,13 +74,13 @@ button {
       <tr>
         <th scope="col">Customer's Name</th>
         <th scope="col">Item Bought</th>
-        <th scope="col">Date_of_sale</th>
+        <th scope="col">Date_Of_Sale</th>
         <th scope="col" >Quantity Bought</th>
         <th scope="col">Selling Price(UGX)</th>
         <th scope="col">Total Cost</th>
         <th scope="col">Amount Paid</th>
         <th scope="col">Customer's Debtor</th>
-        <th scope="col">Clearance_debt</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     {% for sale in sales %}
@@ -89,14 +89,16 @@ button {
 
         
         <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
-        <td>{{ sale.name_of_the_item.name | title }}</td>
+        <td>{{ sale.name_of_the_item | title }}</td>
         <td>{{ sale.date_of_sale }}</td>
         <td>{{ sale.quantity_sold }}</td>
         <td>UGX{{ sale.Selling_price }}</td>
         <td>UGX{{ sale.total_price }}</td>
         <td>UGX{{ sale.amount_received }}</td>
         <td>UGX{{ sale.change }}</td>
-        <td>UGX{{ sale.clearing_debt }}</td>
+        <td><a href="{% url 'itemedit' pk=sale.id %}"  class="btn btn-primary">Edit</a></td>
+
+
       </tr>
     </tbody>
     {% endfor %}
@@ -105,7 +107,7 @@ button {
 </div>
 
 </div>
-<a href="{% url 'item'  %}"  class="hover-button ml-5 "><input type= "submit" value="Go back" class="btn btn-primary mt-2" type="button"/></a>
+<a href="{% url 'item'  %}"  class="hover-button ml-5 "><input type= "submit" value="Go back" class="btn btn-primary mt-3" type="button"/></a>
 </div>
 
 {% endblock%}
