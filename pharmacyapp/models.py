@@ -59,7 +59,9 @@ class Salerecord(models.Model):
         return profit
     def Clearing_debt(self):
         clearing_debt = self.change() - self.amount_due
-
+    @classmethod
+    def total_profits(cls):
+        return sum(divine_instance.profit() for divine_instance in cls.objects.all())
 
         
 
