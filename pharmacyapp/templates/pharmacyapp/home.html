@@ -3,124 +3,82 @@
 
 {% block content %}
 <style>
-        .content{
-          margin-top:2rem;
-        }
-          .babies{
-              display: grid;
-              margin: auto;
-              flex-direction: row;
-              padding: 1rem;
-              border-radius: 15px;
-              background-color: white;
-              box-shadow: 0 11px 34px 0 rgba(0, 0, 0, 0.2);
-            }
-            
-            .babies h2{color: #BEBFC5 ;
-              font-weight: 700;
-              font-size: 30px;
-              text-transform: uppercase;
-              margin-top: 1rem;
-            }
-      
-            .frame th {
-              background-color:#5093AB;
-              color:white;
-          }
-          .table-container {
-              box-shadow: 1px 0px 20px -1px rgba(0,0,0,0.65);
-              overflow-x: auto;
-              max-width: 100%;
-              border-radius: i5px;
-              background-color: white;
-              border-radius: 15px;
-              font-family:sans-serif;
-             
-          
-            
-            }
-            body {
-              margin: 0;
-              padding: 0;
-              background-color: #BEBFC5;
-          } 
-          
-          
-       </style>
-      
-</head>
-<body>
-   
-     <div class="container content">
-        <div class="row">
-        <div class="babies col-md-2 d-md-block ">
-            <h2 class="text-center baby" > {{total_expenses}}</h2> <hr>
-            <h5 class= "text-center" style="color:  #5093ab;" >
-              <strong> Expenses</strong>
-            </h5>
+    .content {
+        margin-top: 2rem;
+    }
+    .stat-card {
+        display: inline-block;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 15px;
+        background-color: white;
+        box-shadow: 0 11px 34px 0 rgba(0, 0, 0, 0.2);
+        width: 18%;
+        text-align: center;
+    }
+    .stat-card h2 {
+        color: #5093AB;
+        font-weight: 700;
+        font-size: 30px;
+        text-transform: uppercase;
+    }
+    .stat-card h5 {
+        color: #BEBFC5;
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 0.5rem;
+    }
+    .graph-container {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 11px 34px 0 rgba(0, 0, 0, 0.2);
+    }
+    .graph-title {
+        text-align: center;
+        font-size: 24px;
+        color: #5093AB;
+        margin-bottom: 1rem;
+    }
+    body {
+        background-color: #BEBFC5;
+    }
+</style>
+
+<div class="container content">
+    <div class="row">
+        <div class="stat-card">
+            <h2>{{ total_expenses }}</h2>
+            <h5>Expenses</h5>
         </div>
-    
-        <div class="babies col-md-2 d-md-block ">
-            <h2 class="text-center baby">{{total_amountpaid}}</h2> <hr>
-            <h5 class= "text-center" style="color:  #5093ab;">
-              <strong>Sales  </strong>
-            </h5>
+        <div class="stat-card">
+            <h2>{{ total_amountpaid }}</h2>
+            <h5>Sales</h5>
         </div>
-    
-        <div class="babies col-md-2 d-md-block ">
-          <h2 class="text-center baby">{{ total_profits}}</h2> <hr>
-          <h5 class= "text-center" style="color:  #5093ab;">
-            <strong> Profits Made</strong>
-          </h5>
-      </div>
-          <div class="babies col-md-2 d-md-block ">
-            <h2 class="text-center baby">{{ total_debt}}</h2> <hr>
-            <h5 class= "text-center" style="color:  #5093ab;">
-              <strong>Debted Issued </strong>
-            </h5>
+        <div class="stat-card">
+            <h2>{{ total_profits }}</h2>
+            <h5>Profits</h5>
         </div>
-        </div>  
-        <hr>
-
+        <div class="stat-card">
+            <h2>{{ total_debt }}</h2>
+            <h5>Debt</h5>
+        </div>
     </div>
-      <div class="container content">
-      <div class="table-container">
-        <caption class="caption-top text-center"><h4 style="margin-left:430px; color:#01b9dd; font-family:sans-serif; font-weight:bolder;  margin-top:10px;margin-bottom:10px;">Recent   Customers </h4></caption>
-      <table  id="dataTable" class="table table-stripped table-hover">
-       
-          <thead  class="frame text-center" >
-              <tr>
-                 <th scope="col" class="project-h1">Name of the Customer</th>
-                  <th scope="col" class="project-h1">Item Bought</th>
-                  <th scope="col" class="project-h1">Quantity Bought</th>
-                  <th scope="col" class="project-h1">Amount Paid </th>
-                  
-              </tr>
-          </thead>
-          {% for customer in recent_customers %}
-          <tbody>
-              <tr style="font-family: sans-serif; text-align:center; font-weight:bolder; color:  #5093ab;">
-                <td>{{customer.payee}}</td>
-                <td>{{customer.name_of_the_item | title}}</td>
-                  <td>{{customer.quantity_sold}}</td>
-                  <td>{{customer.amount_received}}</td>
-                
-        
-              </tr>
-    
-                
-          </tbody>
-          {% endfor %}
-      </table>
-      </div>
+
+    <div class="graph-container">
+        <div class="graph-title">Expenses Over Time</div>
+        {{ expenses_plot|safe }}
     </div>
+
+    <div class="graph-container">
+        <div class="graph-title">Profits Over Time</div>
+        {{ profits_plot|safe }}
     </div>
-    {% endblock %}
 
-
-
-
-
-
-
-
+    <div class="graph-container">
+        <div class="graph-title">Debt Over Time</div>
+        {{ debts_plot|safe }}
+    </div>
+</div>
+{% endblock %}

@@ -15,6 +15,14 @@ from .models import *
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from . filters import *
 from django.http import HttpResponseBadRequest
+import plotly.express as px
+from plotly.offline import plot
+import pandas as pd
+from django.db.models import Sum
+from django.utils.timezone import now
+from datetime import datetime
+from django.shortcuts import render
+from .models import Divine, Salerecord
 
 
 # Create your views here.
@@ -126,16 +134,16 @@ def clearanceadd(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
-@login_required
-def home(request):
-    recent_customers=Salerecord.objects.all()[:3]
-    count_amountpaid = Salerecord.objects.aggregate(Sum('amount_received'))
-    total_amountpaid=count_amountpaid.get('amount_received__sum',0)
-    total_expenses = Divine.total_expenses()
-    total_debt=Salerecord.total_debt()
-    total_profits=Salerecord.total_profits()
-    context={'recent_customers':recent_customers,'total_amountpaid':total_amountpaid,'total_expenses':total_expenses,'total_debt':total_debt,'total_profits':total_profits}
-    return render(request,'pharmacyapp/home.html',context)
+# @login_required
+# def home(request):
+#     recent_customers=Salerecord.objects.all()[:3]
+#     count_amountpaid = Salerecord.objects.aggregate(Sum('amount_received'))
+#     total_amountpaid=count_amountpaid.get('amount_received__sum',0)
+#     total_expenses = Divine.total_expenses()
+#     total_debt=Salerecord.total_debt()
+#     total_profits=Salerecord.total_profits()
+#     context={'recent_customers':recent_customers,'total_amountpaid':total_amountpaid,'total_expenses':total_expenses,'total_debt':total_debt,'total_profits':total_profits}
+#     return render(request,'pharmacyapp/home.html',context)
 
 def services(request):
     return render(request,'pharmacyapp/services.html')
@@ -153,3 +161,77 @@ def itemedit(request,pk):
         form=Sellforms(instance=item)
 
     return render(request,'pharmacyapp/itemedit.html',{'form':form, 'item':item})
+
+
+def home(request):
+    # Expenses by month
+    expenses_data = (
+        Divine.objects.values('date_of_stock__year', 'date_of_stock__month')
+        .annotate(total_expenses=Sum('quantity') * Sum('unit_price'))
+        .order_by('date_of_stock__year', 'date_of_stock__month')
+    )
+
+    expenses_df = pd.DataFrame(expenses_data)
+    expenses_df['date'] = expenses_df.apply(
+        lambda row: datetime(row['date_of_stock__year'], row['date_of_stock__month'], 1),
+        axis=1
+    )
+    
+    # Profits by month
+    profits_data = (
+        Salerecord.objects.values('date_of_sale__year', 'date_of_sale__month')
+        .annotate(total_profits=Sum('quantity_sold') * Sum('Selling_price'))
+        .order_by('date_of_sale__year', 'date_of_sale__month')
+    )
+#DataFrame: Converts the profits data into a pandas DataFrame.
+# Date Column: Adds a date column for plotting purposes.
+    profits_df = pd.DataFrame(profits_data)
+    profits_df['date'] = profits_df.apply(
+        lambda row: datetime(row['date_of_sale__year'], row['date_of_sale__month'], 1),
+        axis=1
+    )
+
+    # Debts by month
+    debts_data = (
+        Salerecord.objects.values('date_of_sale__year', 'date_of_sale__month')
+        .annotate(total_debt=Sum('amount_due'))
+        .order_by('date_of_sale__year', 'date_of_sale__month')
+    )
+    
+    debts_df = pd.DataFrame(debts_data)
+    debts_df['date'] = debts_df.apply(
+        lambda row: datetime(row['date_of_sale__year'], row['date_of_sale__month'], 1),
+        axis=1
+    )
+
+    # Plotting
+    fig_expenses = px.bar(expenses_df, x='date', y='total_expenses', title="Monthly Expenses")
+    fig_profits = px.bar(profits_df, x='date', y='total_profits', title="Monthly Profits")
+    fig_debts = px.bar(debts_df, x='date', y='total_debt', title="Monthly Debt")
+
+    expenses_plot = plot(fig_expenses, output_type='div')
+    profits_plot = plot(fig_profits, output_type='div')
+    debts_plot = plot(fig_debts, output_type='div')
+
+    # Other context data
+    recent_customers = Salerecord.objects.all()[:3]
+    count_amountpaid = Salerecord.objects.aggregate(Sum('amount_received'))
+    total_amountpaid = count_amountpaid.get('amount_received__sum', 0)
+    total_expenses = Divine.total_expenses()
+    total_debt = Salerecord.total_debt()
+    total_profits = Salerecord.total_profits()
+
+    context = {
+        'recent_customers': recent_customers,
+        'total_amountpaid': total_amountpaid,
+        'total_expenses': total_expenses,
+        'total_debt': total_debt,
+        'total_profits': total_profits,
+        'expenses_plot': expenses_plot,
+        'profits_plot': profits_plot,
+        'debts_plot': debts_plot
+    }
+    return render(request, 'pharmacyapp/home.html', context)
+
+
+   
