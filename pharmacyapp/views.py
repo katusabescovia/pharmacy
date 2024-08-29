@@ -236,33 +236,31 @@ def itemedit(request,pk):
 #         'debts_plot': debts_plot
 #     }
 #     return render(request, 'pharmacyapp/home.html', context)
-from django.db.models import F, Sum, ExpressionWrapper, DecimalField
+from django.shortcuts import render
+from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+from .models import Divine, Salerecord
 import pandas as pd
 import plotly.express as px
 from plotly.offline import plot
-from datetime import datetime
 
 def home(request):
-    # Expenses by month
+    # Expenses by exact date
     expenses_data = (
-        Divine.objects.values('date_of_stock__year', 'date_of_stock__month')
+        Divine.objects.values('date_of_stock')
         .annotate(
             total_expenses=Sum(
                 ExpressionWrapper(F('quantity') * F('unit_price'), output_field=DecimalField())
             )
         )
-        .order_by('date_of_stock__year', 'date_of_stock__month')
+        .order_by('date_of_stock')
     )
 
     expenses_df = pd.DataFrame(expenses_data)
-    expenses_df['date'] = expenses_df.apply(
-        lambda row: datetime(row['date_of_stock__year'], row['date_of_stock__month'], 1),
-        axis=1
-    )
-    
-    # Profits by month
+    expenses_df['date'] = pd.to_datetime(expenses_df['date_of_stock'])
+
+    # Profits by exact date
     profits_data = (
-        Salerecord.objects.values('date_of_sale__year', 'date_of_sale__month')
+        Salerecord.objects.values('date_of_sale')
         .annotate(
             total_sales=Sum(
                 ExpressionWrapper(F('quantity_sold') * F('Selling_price'), output_field=DecimalField())
@@ -276,39 +274,37 @@ def home(request):
                 F('total_sales') - F('total_cost'), output_field=DecimalField()
             )
         )
-        .order_by('date_of_sale__year', 'date_of_sale__month')
+        .order_by('date_of_sale')
     )
     
-    print("Profits Data:", profits_data)  # Debug print
-
     profits_df = pd.DataFrame(profits_data)
-    profits_df['date'] = profits_df.apply(
-        lambda row: datetime(row['date_of_sale__year'], row['date_of_sale__month'], 1),
-        axis=1
-    )
+    profits_df['date'] = pd.to_datetime(profits_df['date_of_sale'])
 
-
-    # Debts by month
+    # Debts by exact date
     debts_data = (
-        Salerecord.objects.values('date_of_sale__year', 'date_of_sale__month')
+        Salerecord.objects.values('date_of_sale')
         .annotate(
             total_debt=Sum(
                 ExpressionWrapper(F('quantity_sold') * F('Selling_price') - F('amount_received'), output_field=DecimalField())
             )
         )
-        .order_by('date_of_sale__year', 'date_of_sale__month')
+        .order_by('date_of_sale')
     )
 
     debts_df = pd.DataFrame(debts_data)
-    debts_df['date'] = debts_df.apply(
-        lambda row: datetime(row['date_of_sale__year'], row['date_of_sale__month'], 1),
-        axis=1
-    )
+    debts_df['date'] = pd.to_datetime(debts_df['date_of_sale'])
 
     # Plotting
-    fig_expenses = px.bar(expenses_df, x='date', y='total_expenses', title="Monthly Expenses")
-    fig_profits = px.bar(profits_df, x='date', y='total_profits', title="Monthly Profits")
-    fig_debts = px.bar(debts_df, x='date', y='total_debt', title="Monthly Debt")
+    fig_expenses = px.bar(expenses_df, x='date', y='total_expenses', title="Daily Expenses")
+    fig_profits = px.bar(profits_df, x='date', y='total_profits', title="Daily Profits")
+    fig_debts = px.bar(debts_df, x='date', y='total_debt', title="Daily Debt")
+
+    # Ensure the hover template shows the correct full date
+    hover_template = '%{x|%d %B %Y}: %{y}'
+
+    fig_expenses.update_traces(hovertemplate=hover_template)
+    fig_profits.update_traces(hovertemplate=hover_template)
+    fig_debts.update_traces(hovertemplate=hover_template)
 
     expenses_plot = plot(fig_expenses, output_type='div')
     profits_plot = plot(fig_profits, output_type='div')
