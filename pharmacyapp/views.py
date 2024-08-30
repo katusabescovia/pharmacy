@@ -162,8 +162,6 @@ def itemedit(request,pk):
 
     return render(request,'pharmacyapp/itemedit.html',{'form':form, 'item':item})
 
-
-
 from django.db.models import Sum, ExpressionWrapper, DecimalField, F
 from django.db.models.functions import TruncMonth
 import pandas as pd
@@ -238,23 +236,26 @@ def home(request):
         expenses_df, 
         x='date_of_stock', 
         y='total_expenses', 
-        title="Daily Expenses Aggregated by Month"
+        title="Daily Expenses Aggregated by Month",
+        color_discrete_sequence=['#5093ab']  # Red color theme
     )
     fig_profits = px.bar(
         profits_df, 
         x='date_of_sale', 
         y='total_profits', 
-        title="Daily Profits Aggregated by Month"
+        title="Daily Profits Aggregated by Month",
+        color_discrete_sequence=['#5093ab']  # Red color theme
     )
     fig_debts = px.bar(
         debts_df, 
         x='date_of_sale', 
         y='total_debt', 
-        title="Daily Debts Aggregated by Month"
+        title="Daily Debts Aggregated by Month",
+        color_discrete_sequence=['#5093ab']  # Red color theme
     )
 
     # Hover template
-    hover_template = '%{x|%d %B %Y}: %{y}'
+    hover_template = '%{x|%d %B %Y}: %{y:.2f}'
 
     fig_expenses.update_traces(hovertemplate=hover_template)
     fig_profits.update_traces(hovertemplate=hover_template)
@@ -265,28 +266,37 @@ def home(request):
         xaxis_title='Date', 
         yaxis_title='Total Expenses',
         xaxis=dict(
-            tickformat='%d %b %Y',  # Format dates on the x-axis
-            tickvals=expenses_df['date_of_stock'],  # Set x-axis ticks to be the actual dates
-            ticktext=[date.strftime('%d %b %Y') for date in expenses_df['date_of_stock']]  # Show full date
-        )
+            tickformat='%d %b %Y',
+            tickvals=expenses_df['date_of_stock'],
+            ticktext=[date.strftime('%d %b %Y') for date in expenses_df['date_of_stock']]
+        ),
+        yaxis=dict(gridcolor='LightGray'),  # Gridlines color
+        plot_bgcolor='white',  # Background color
+        font=dict(size=12, color='DarkSlateGray')  # Font styling
     )
     fig_profits.update_layout(
         xaxis_title='Date', 
         yaxis_title='Total Profits',
         xaxis=dict(
-            tickformat='%d %b %Y',  # Format dates on the x-axis
-            tickvals=profits_df['date_of_sale'],  # Set x-axis ticks to be the actual dates
-            ticktext=[date.strftime('%d %b %Y') for date in profits_df['date_of_sale']]  # Show full date
-        )
+            tickformat='%d %b %Y',
+            tickvals=profits_df['date_of_sale'],
+            ticktext=[date.strftime('%d %b %Y') for date in profits_df['date_of_sale']]
+        ),
+        yaxis=dict(gridcolor='LightGray'),
+        plot_bgcolor='white',
+        font=dict(size=12, color='DarkSlateGray')
     )
     fig_debts.update_layout(
         xaxis_title='Date', 
         yaxis_title='Total Debts',
         xaxis=dict(
-            tickformat='%d %b %Y',  # Format dates on the x-axis
-            tickvals=debts_df['date_of_sale'],  # Set x-axis ticks to be the actual dates
-            ticktext=[date.strftime('%d %b %Y') for date in debts_df['date_of_sale']]  # Show full date
-        )
+            tickformat='%d %b %Y',
+            tickvals=debts_df['date_of_sale'],
+            ticktext=[date.strftime('%d %b %Y') for date in debts_df['date_of_sale']]
+        ),
+        yaxis=dict(gridcolor='LightGray'),
+        plot_bgcolor='white',
+        font=dict(size=12, color='DarkSlateGray')
     )
 
     expenses_plot = plot(fig_expenses, output_type='div')
