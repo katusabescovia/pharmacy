@@ -169,6 +169,7 @@ from django.db.models.functions import TruncMonth
 import pandas as pd
 import plotly.express as px
 from plotly.offline import plot
+from django.shortcuts import render
 
 def home(request):
     # Expenses by day, aggregated by month for plotting
