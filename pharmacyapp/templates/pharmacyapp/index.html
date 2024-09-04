@@ -16,13 +16,9 @@
         }
 
         .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0;
-            text-align: left;
             position: relative;
-            overflow: auto;
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-align: left;
+            padding: 0 20px;
         }
 
         .daycare-image {
@@ -31,14 +27,14 @@
             opacity: 0.6;
         }
 
-
         .logo {
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 2;
             width: 120px;
             height: auto;
+            border-radius: 50%;
+            z-index: 2;
         }
 
         .tagline {
@@ -53,11 +49,16 @@
             max-width: 80%;
         }
 
+        .tagline h1 {
+            color: #5093AB;
+            font-weight: bolder;
+        }
+
         .about-text {
             margin: 50px auto;
             max-width: 800px;
             color: #555;
-            font-size: 10px;
+            font-size: 16px;
             line-height: 1.6;
         }
 
@@ -77,42 +78,100 @@
             background-color: #5093AB;
         }
 
-
-
         .footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color:#5093AB;
+            background-color: #5093AB;
             color: white;
             text-align: center;
             padding: 20px;
             font-weight: bold;
         }
-    </style>
 
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .logo {
+                width: 100px;
+                left: 10px;
+                top: 10px;
+            }
+
+            .tagline {
+                top: 50%;
+                left: 10px;
+                font-size: 18px;
+                max-width: 90%;
+                text-align: center;
+                transform: translateY(-50%);
+            }
+
+            .tagline h1 {
+                font-size: 22px;
+            }
+
+            .learn-more-button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+
+            .footer {
+                padding: 15px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 80px;
+                left: 5px;
+                top: 5px;
+            }
+
+            .tagline {
+                top: 60%;
+                left: 5px;
+                font-size: 16px;
+                max-width: 95%;
+                text-align: center;
+                transform: translateY(-50%);
+            }
+
+            .tagline h1 {
+                font-size: 18px;
+            }
+
+            .learn-more-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .footer {
+                padding: 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="container">
-        <img src="../static/images/daph.jpg" alt="Divinetouch Image" class="daycare-image">
-        <div class="overlay"></div>
-        <img src="../static/images/logo.jpg" alt="Little Stars Logo" class="logo" style=" border-radius:50%;"><br>
+        <img src="{% static 'images/daph.jpg' %}" alt="Divinetouch Image" class="daycare-image">
+        <img src="{% static 'images/logo.jpg' %}" alt="Divine Touch Logo" class="logo">
         <div class="tagline">
-            <h1 style="color:#5093AB; font-weight: bolder;">Welcome to Divine Touch</h1>Where Your health is priority
+            <h1>Welcome to Divine Touch</h1>
+            Where Your Health is a Priority
             <p>"Experience seamless healthcare management<br><br>
-                 with our clinic app – your health, our commitment."</p><br>
+            with our clinic app – your health, our commitment."</p>
             <a href="{% url 'login' %}" class="learn-more-button">Get Started</a>
         </div>
     </div>
 
     <footer class="footer">
-        © 2024 Divine touch medical clinic. All rights reserved.
+        © 2024 Divine Touch Medical Clinic. All rights reserved.
     </footer>
 
 </body>
 
-</html> 
-
-
+</html>

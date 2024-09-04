@@ -1,5 +1,4 @@
-
-{% extends 'pharmacyapp/base.html'%}
+{% extends 'pharmacyapp/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -9,62 +8,47 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-       max-width: 50%;
+        max-width: 80%; /* Adjusted for better responsiveness */
         margin: auto;
-        border-radius: 5px;
-
-    margin-bottom: 30px;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    padding-right: 15px;
-    background-color:white;
-    border: 5px solid  #5093ab;
-     box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
-     transition: border-color 0.3s, box-shadow 0.3s;
-    margin-top: 24px;
-    
-        
-       
+        border-radius: 10px;
+        padding: 15px;
+        background-color: white;
+        border: 5px solid #5093ab;
+        box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s, box-shadow 0.3s;
+        margin-top: 24px;
     }
 
-    h4{
+    h4 {
         color: #01b9dd;
         text-align: center;
         font-family: sans-serif;
         font-weight: bolder;
-        margin-top:1rem;
+        margin-top: 1rem;
     }
 
     input[type="text"],
     input[type="number"],
     input[type="date"],
     select {
-        border: 2px solid   #5093ab;
+        border: 2px solid #5093ab;
         box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
         transition: border-color 0.3s, box-shadow 0.3s;
-        padding: 10px; /* Added padding */
-        border-radius: 5px; /* Added border radius */
-        width: 100%; /* Make input fields fill the available space */
-        max-width: 100%; /* Ensure input fields don't overflow their container */
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
     }
 
-     select[name="name_of_the_item"] {
-        border: 2px solid   #5093ab;
+    select[name="name_of_the_item"] {
+        border: 2px solid #5093ab;
         box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
         transition: border-color 0.3s, box-shadow 0.3s; 
     }
-  
-    
-    
-    
-    
 
     label {
         font-weight: bold;
         margin-top: 7px;
-        margin-bottom:5px ;
+        margin-bottom: 5px;
     }
 
     button[type="submit"] {
@@ -78,23 +62,57 @@
         max-width: 100%;
         height: 40px;
         padding: 10px;
-        transition: background-color 0.8s, color 0.7s; /* Adding transition effect */
+        transition: background-color 0.8s, color 0.7s;
     }
-    button[type="submit"]:hover {
-        /* Changing background color on hover */
-      background-color:#5093ab;  /* Chang#5093ab;ing text color on hover */
-    }
-    
-    
-</style>  
 
-<h4 > SELL FORM </h4><hr>
+    button[type="submit"]:hover {
+        background-color: #5093ab;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .sitter-form {
+            grid-template-columns: 1fr; /* Stack columns vertically on smaller screens */
+            max-width: 90%; /* Adjust max-width */
+            padding: 10px;
+        }
+
+        h4 {
+            font-size: 20px;
+            margin-top: 1rem;
+        }
+
+        button[type="submit"] {
+            font-size: 14px;
+            height: auto;
+            padding: 8px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .sitter-form {
+            max-width: 100%; /* Full width on very small screens */
+            padding: 10px;
+        }
+
+        h4 {
+            font-size: 18px;
+            margin-top: 0.5rem;
+        }
+
+        button[type="submit"] {
+            font-size: 12px;
+            padding: 6px;
+        }
+    }
+</style>
+
+<h4>SELL FORM</h4><hr>
 <div class="container">
     <form method="POST" class="sitter-form">
-
         {% csrf_token %}
-        {{ sales_form| crispy }}
-        <button type="submit" class="btn btn-primary" >Sell</button>
+        {{ sales_form|crispy }}
+        <button type="submit" class="btn btn-primary">Sell</button>
     </form>
 </div>
 

@@ -1,5 +1,4 @@
-
-{% extends 'pharmacyapp/base.html'%}
+{% extends 'pharmacyapp/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -9,63 +8,48 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-       max-width: 50%;
+        max-width: 50%;
         margin: auto;
-        border-radius: 5px;
-
-    margin-bottom: 30px;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    padding-right: 15px;
-    background-color:white;
-    border: 5px solid  #5093ab;
-     box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
-     transition: border-color 0.3s, box-shadow 0.3s;
-    margin-top: 24px;
-    
-        
-       
+        border-radius: 10px;
+        padding: 15px;
+        background-color: white;
+        border: 5px solid #5093ab;
+        box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s, box-shadow 0.3s;
+        margin-top: 24px;
     }
 
-    h4{
+    h4 {
         color: #01b9dd;
         text-align: center;
         font-family: sans-serif;
         font-weight: bolder;
-        margin-top:2rem;
+        margin-top: 2rem;
     }
 
     input[type="text"],
     input[type="number"],
     input[type="date"],
     select {
-        border: 2px solid  #5093ab;
-        box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
-        transition: border-color 0.3s, box-shadow 0.3s;
-        padding: 10px; /* Added padding */
-        border-radius: 5px; /* Added border radius */
-        width: 100%; /* Make input fields fill the available space */
-        max-width: 100%; /* Ensure input fields don't overflow their container */
-    }
-
-   
-    
-    select[name="Customers_name"] ,select[name="name_of_the_item"],select[name="status"]{
         border: 2px solid #5093ab;
         box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
-        transition: border-color 0.3s, box-shadow 0.3s; 
+        transition: border-color 0.3s, box-shadow 0.3s;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding is included in width */
     }
-  
-    
-  
-    
+
+    select[name="Customers_name"],
+    select[name="name_of_the_item"],
+    select[name="status"] {
+        border: 2px solid #5093ab;
+    }
 
     label {
         font-weight: bold;
         margin-top: 7px;
-        margin-bottom:5px ;
+        margin-bottom: 5px;
     }
 
     button[type="submit"] {
@@ -76,28 +60,67 @@
         border-radius: 5px;
         font-size: 16px;
         cursor: pointer;
-        max-width: 100%;
+        width: 100%;
         height: 40px;
         padding: 10px;
-        transition: background-color 0.8s, color 0.7s; /* Adding transition effect */
+        transition: background-color 0.8s, color 0.7s;
     }
     
     button[type="submit"]:hover {
-        /* Changing background color on hover */
-      background-color:#5093ab;  /* Chang#5093ab;ing text color on hover */
+        background-color: #5093ab;
     }
-    
-        
-    
-</style>  
 
-<h4 > CLEARANCE FORM </h4><hr>
+    /* Responsive Styles */
+    @media (max-width: 1200px) {
+        .sitter-form {
+            max-width: 70%;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .sitter-form {
+            max-width: 80%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .sitter-form {
+            max-width: 90%;
+            grid-template-columns: 1fr; /* Stack inputs vertically */
+        }
+
+        h4 {
+            font-size: 20px;
+        }
+
+        button[type="submit"] {
+            font-size: 14px;
+            padding: 8px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .sitter-form {
+            max-width: 95%;
+        }
+
+        h4 {
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            font-size: 12px;
+            padding: 6px;
+        }
+    }
+</style>
+
+<h4>CLEARANCE FORM</h4><hr>
 <div class="container">
     <form method="POST" class="sitter-form">
-
         {% csrf_token %}
         {{ form | crispy }}
-        <button type="submit" class="btn btn-primary" >Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 

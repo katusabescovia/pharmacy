@@ -1,19 +1,18 @@
-{% extends 'pharmacyapp/base.html'%} 
-{% block content%}
+{% extends 'pharmacyapp/base.html' %}
+{% block content %}
 <br>
 
 <style>
-  h4{ color:#01b9dd;
+  h4 {
+    color: #01b9dd;
     font-weight: bold;
-    margin-left: 500px;
+    margin-left: 50px;
+    text-align: center; /* Center the heading on smaller screens */
   }
-button {
-  background-color: #01b9dd;
-}
-.btn-primary {
-  background-color: #01b9dd;
-}
-.btn {
+
+  button,
+  .btn-primary,
+  .btn {
     background-color: #01b9dd;
     color: white;
     transition: background-color 0.7s;
@@ -21,95 +20,123 @@ button {
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
-}
+  }
 
-.btn:hover {
+  .btn:hover {
     background-color: #5093ab; /* Change to a darker shade for hover */
-}
+  }
 
-.table-container{
-  box-shadow: 1px 0px 20px -1px rgba(0,0,0,0.65);
-  overflow-x: auto;
-  max-width: 100%;
-  border-radius: 15px;
-  background-color: white;
-  border-radius: 15px;
-  font-family:sans-serif;
+  .table-container {
+    box-shadow: 1px 0px 20px -1px rgba(0, 0, 0, 0.65);
+    overflow-x: auto;
+    max-width: 100%;
+    border-radius: 15px;
+    background-color: white;
+    font-family: sans-serif;
+  }
 
+  .table {
+    width: 100%;
+    margin: 0 auto; /* Center the table */
+  }
 
-}
+  @media (max-width: 768px) {
+    h4 {
+      margin-left: 0;
+      font-size: 1.2rem;
+    }
+
+    .table-container {
+      margin: 0 10px; /* Add margin for smaller screens */
+    }
+
+    .table thead th,
+    .table tbody td {
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    h4 {
+      font-size: 1rem;
+    }
+
+    .table-container {
+      margin: 0 5px; /* Further reduce margin for very small screens */
+    }
+
+    .table thead th,
+    .table tbody td {
+      font-size: 0.8rem;
+      padding: 6px;
+    }
+  }
 </style>
 
-  
-    <h4 >TOTAL SALES MADE</h4><hr>
+<h4>TOTAL SALES MADE</h4>
+<hr>
 <div class="container">
-<div class="table-container">
-  <table class="table" style="margin-top:40px;">
-    <thead class="table-dark text-center" style="background-color: #5093ab;">
-      <tr>
-        <th scope="col">Total Amount Expected</th>
-        <th scope="col">Total Amount Received</th>
-        <th scope="col">Total Debts Issued</th>
-        <th scope="col">Net Amount</th>
-      </tr>
-      </tr>
-    </thead>
-    <tbody class="text-center">
-      <tr>
-        <td>UGX{{total_expected}}</td>
-        <td>UGX{{total}}</td>
-        <td>UGX{{change}}</td>
-        <td>UGX{{net}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="table" style="margin-top:40px;">
+      <thead class="table-dark text-center" style="background-color: #5093ab;">
+        <tr>
+          <th scope="col">Total Amount Expected</th>
+          <th scope="col">Total Amount Received</th>
+          <th scope="col">Total Debts Issued</th>
+          <th scope="col">Net Amount</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr>
+          <td>UGX{{total_expected}}</td>
+          <td>UGX{{total}}</td>
+          <td>UGX{{change}}</td>
+          <td>UGX{{net}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-</div>
-</div>
+
 <br>
 <div class="container">
   <div class="table-container">
-  <table class=" table" style="margin-top:40px;">
-    <thead class="table-dark" style="background-color: #5093ab;">
-      <tr>
-        <th scope="col">Customer's Name</th>
-        <th scope="col">Item Bought</th>
-        <th scope="col">Date_Of_Sale</th>
-        <th scope="col" >Quantity Bought</th>
-        <th scope="col">Selling Price(UGX)</th>
-        <th scope="col">Total Cost</th>
-        <th scope="col">Amount Paid</th>
-        <th scope="col">Customer's Debtor</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    {% for sale in sales %}
-    <tbody>
-      <tr>
-
-        
-        <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
-        <td>{{ sale.name_of_the_item | title }}</td>
-        <td>{{ sale.date_of_sale }}</td>
-        <td>{{ sale.quantity_sold }}</td>
-        <td>UGX{{ sale.Selling_price }}</td>
-        <td>UGX{{ sale.total_price }}</td>
-        <td>UGX{{ sale.amount_received }}</td>
-        <td>UGX{{ sale.change }}</td>
-        <td><a href="{% url 'itemedit' pk=sale.id %}"  class="btn btn-primary">Edit</a></td>
-
-
-      </tr>
-    </tbody>
-    {% endfor %}
-  </table>
-
+    <table class="table" style="margin-top:40px;">
+      <thead class="table-dark" style="background-color: #5093ab;">
+        <tr>
+          <th scope="col">Customer's Name</th>
+          <th scope="col">Item Bought</th>
+          <th scope="col">Date_Of_Sale</th>
+          <th scope="col">Quantity Bought</th>
+          <th scope="col">Selling Price(UGX)</th>
+          <th scope="col">Total Cost</th>
+          <th scope="col">Amount Paid</th>
+          <th scope="col">Customer's Debtor</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      {% for sale in sales %}
+      <tbody>
+        <tr>
+          <td style="font-weight:bolder; color: #0c356a;">{{sale.payee | title}}</td>
+          <td>{{ sale.name_of_the_item | title }}</td>
+          <td>{{ sale.date_of_sale }}</td>
+          <td>{{ sale.quantity_sold }}</td>
+          <td>UGX{{ sale.Selling_price }}</td>
+          <td>UGX{{ sale.total_price }}</td>
+          <td>UGX{{ sale.amount_received }}</td>
+          <td>UGX{{ sale.change }}</td>
+          <td><a href="{% url 'itemedit' pk=sale.id %}" class="btn btn-primary">Edit</a></td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
 </div>
 
-</div>
-<a href="{% url 'item'  %}"  class="hover-button ml-5 "><input type= "submit" value="Go back" class="btn btn-primary mt-3" type="button"/></a>
-</div>
+<a href="{% url 'item' %}" class="hover-button ml-5">
+  <input type="submit" value="Go back" class="btn btn-primary mt-3" />
+</a>
 
-{% endblock%}
-
-
+{% endblock %}
