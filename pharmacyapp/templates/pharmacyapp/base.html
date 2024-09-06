@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,16 +9,14 @@
     <title>Pharmacy App</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-     <!-- Raleway font -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway"
-      rel="stylesheet"
-    />
+    <!-- Raleway font -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
     <!-- Montserrat font -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <style>
-      body{
+      body {
         background-color: #bebfc5;
+        font-family: 'Raleway', sans-serif;
       }
 
       .footer {
@@ -29,63 +27,140 @@
         width: 100%;
         font-weight: 900;
         color: white;
-    }
+      }
 
-    .navbar-dark .navbar-nav .nav-link {
-      color: white;
-      font-weight: bold;
-      font-size: 15px;
-      transition: all 0.5s;
-    }
+      .navbar-dark .navbar-nav .nav-link {
+        color: white;
+        font-weight: bold;
+        font-size: 15px;
+        transition: all 0.5s;
+      }
 
-    .navbar-dark .navbar-nav .nav-link:hover {
-      color: rgb(69, 65, 65);
+      .navbar-dark .navbar-nav .nav-link:hover {
+        color: rgb(69, 65, 65);
+      }
 
-      
-    }
+      .navbar-dark .navbar-nav .nav-item.active .nav-link {
+        text-decoration: underline;
+      }
 
-        
+      .navbar-brand {
+        font-size: 25px;
+        color: white;
+        white-space: nowrap;
+      }
+
+      /* Media Queries for Responsive Design */
+
+      @media (max-width: 575.98px) {
+        .navbar-brand {
+          font-size: 20px;
+        }
+
+        .navbar-nav {
+          text-align: center;
+        }
+
+        .navbar-nav .nav-item {
+          margin-bottom: 10px;
+        }
+
+        .navbar-toggler {
+          float: right;
+        }
+
+        .footer {
+          font-size: 12px;
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .navbar-brand {
+          font-size: 22px;
+        }
+
+        .navbar-nav .nav-link {
+          font-size: 14px;
+        }
+
+        .footer {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 991.98px) {
+        .navbar-brand {
+          font-size: 24px;
+        }
+
+        .navbar-nav .nav-link {
+          font-size: 15px;
+        }
+
+        .footer {
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 1199.98px) {
+        .navbar-brand {
+          font-size: 25px;
+        }
+
+        .navbar-nav .nav-link {
+          font-size: 16px;
+        }
+
+        .footer {
+          font-size: 16px;
+        }
+      }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5093ab; color: white;"> 
-        <a class="nav-link" href=""><h1 class="navbar-brand" style = "font-size: 25px; color: white;">DR. Daniel Opio</h1></a>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5093ab;"> 
+        <a class="navbar-brand" href="#">Dr. Daniel Opio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="nav navbar-nav ml-auto" style="color: white;">
-           {% if user.is_authenticated%}
-              <li class="nav-item">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item {% if request.path == '/home/' %}active{% endif %}">
                 <a class="nav-link" href="/home">HOME</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item {% if request.path == '/receipt/' %}active{% endif %}">
                 <a class="nav-link" href="/receipt">RECEIPTS</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/item">PRODUCTS IN STOCK </a>
+              <li class="nav-item {% if request.path == '/item/' %}active{% endif %}">
+                <a class="nav-link" href="/item">PRODUCTS IN STOCK</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item {% if request.path == '/all_sales/' %}active{% endif %}">
                 <a class="nav-link" href="/all_sales">ALL SALES</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item {% if request.path == '/clearance/' %}active{% endif %}">
                 <a class="nav-link" href="/clearance">CLEARANCE</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/services/">SERVICES</a>
+              <li class="nav-item {% if request.path == '/services/' %}active{% endif %}">
+                <a class="nav-link" href="/services">SERVICES</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item {% if request.path == '/logout/' %}active{% endif %}">
                 <a class="nav-link" href="/logout/">LOGOUT</a>
               </li>
             {% endif %}
           </ul>
+        </div>
     </nav>
-    {% block content%}
 
-    {% endblock%}
+    {% block content %}
+    <!-- Your content here -->
+    {% endblock %}
+
     <footer class="footer mt-5">
       © 2024 Divine touch medical clinic. All rights reserved.
-  </footer>
+    </footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

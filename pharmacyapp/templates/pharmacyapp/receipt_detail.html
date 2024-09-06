@@ -4,44 +4,113 @@
 {% block content %}
 
 <style>
-.card-header{font-family: sans-serif;}
+    .card-header {
+        font-family: sans-serif;
+    }
 
+    button {
+        background-color: #0c356a;
+    }
 
-button {
-    background-color: #0c356a;
-}
+    .btn-primary {
+        background-color: #094f9f;
+    }
 
-.btn-primary {
-    background-color: #094f9f;
-}
+    .btn {
+        background-color: #01b9dd;
+        color: white;
+        border: none;
+        transition: background-color 0.7s;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
 
-.btn {
-    background-color: #01b9dd;
-    color: white;
-    border: none;
-    transition: background-color 0.7s;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    margin-bottom: 30px;
-}
+    .btn:hover {
+        background-color: #5093ab; /* Change to a darker shade for hover */
+    }
 
-.btn:hover {
-    background-color: #5093ab; /* Change to a darker shade for hover */
-}
+    p {
+        font-weight: bolder;
+    }
 
-p{font-weight: bolder;}
+    /* Responsive Styles */
+    @media (max-width: 1200px) {
+        .card {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .card {
+            width: 90%;
+        }
+
+        .btn {
+            padding: 6px 12px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            width: 95%;
+            margin-top: 40px;
+        }
+
+        .card-header h5 {
+            font-size: 18px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+        }
+
+        .table th, .table td {
+            font-size: 12px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card-header h5 {
+            font-size: 16px;
+        }
+
+        .card-header p {
+            font-size: 12px;
+        }
+
+        .table th, .table td {
+            font-size: 10px;
+        }
+
+        .btn {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
 </style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card" style="margin:auto; width:60%; margin-top:80px; font-family:sans-serif;">
                 <div class="card-header">
                     <h5 class="text-center" style="font-weight:bolder; color: #5093ab;">Divine Touch</h5>
-                    <p class="">Iceme,Oyam, Uganda</p>
-                    <p class="">Contact us: +256777037903</p>
-                    <p class="">Date: {{ receipt.date_of_sale }}</p>
-                    <p class="">Receipt Number: Item-RECEIPT-0{{ receipt.id }}</p>
+                    <p>Iceme, Oyam, Uganda</p>
+                    <p>Contact us: +256777037903</p>
+                    <p>Date: {{ receipt.date_of_sale }}</p>
+                    <p>Receipt Number: Item-RECEIPT-0{{ receipt.id }}</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -59,7 +128,7 @@ p{font-weight: bolder;}
                                 <tr style="font-family: sans-serif;">
                                     <td>{{ receipt.name_of_the_item | title }}</td>
                                     <td class="text-center">{{ receipt.quantity_sold }}</td>
-                                    <td class="text-right">Ugx {{ receipt.total_price}}</td>
+                                    <td class="text-right">Ugx {{ receipt.total_price }}</td>
                                     <td class="text-right">Ugx {{ receipt.amount_received }}</td>
                                     <td class="text-right">Ugx {{ receipt.change }}</td>
                                 </tr>
@@ -71,8 +140,9 @@ p{font-weight: bolder;}
             </div>
         </div>
     </div>
-    <a href="{% url 'item'  %}"  class="hover-button"><input type= "submit" value="Go back" class="btn btn-primary" style="margin-bottom:20px;" type="button"/></a>
+    <a href="{% url 'item' %}" class="hover-button">
+        <input type="submit" value="Go back" class="btn btn-primary" style="margin-bottom:20px;" type="button"/>
+    </a>
 </div>
 
-</div>
 {% endblock %}

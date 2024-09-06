@@ -1,65 +1,88 @@
 {% extends 'pharmacyapp/base.html'%} 
 {% block content %}
 <style>
-h3 ,h4{
+    h3, h4 {
         font-family: sans-serif;
         color: white;
-        margin-left: auto;
-        margin-right: auto;
         text-align: center;
-   
-      }
-      
-      p{font-family: sans-serif; }
-      button {
-        background-color: #0c356a;
+        margin: 20px auto;
     }
-
+    
+    p {
+        font-family: sans-serif;
+        font-weight: bolder;
+    }
+    
+    button, .btn, .btn-primary {
+        background-color: #01b9dd;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color 0.7s;
+    }
+    
     .btn-primary {
         background-color: #094f9f;
     }
-
-    .btn {
-        background-color: #01b9dd;
-        color: white;
-        transition: background-color 0.7s;
-        text-decoration: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        border: none;
-    }
-
+    
     .btn:hover {
         background-color: #5093ab;
     }
-  p{ font-weight:bolder;}
-    
+
+    .card {
+        background-color: white;
+        margin: 20px auto;
+        font-family: sans-serif;
+        width: 90%;
+        max-width: 600px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card h3 {
+        color: #5093ab;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    @media (min-width: 768px) {
+        .card {
+            width: 50%;
+        }
+    }
 </style>
 
-<h3 class="text-center" style=" margin-top:85px; color: #01B9DD; font-weight: 900; font-size: 4ch">ALL RECEIPTS</h3><hr>
+<h3 class="text-center" style="margin-top: 85px; color: #01B9DD; font-weight: 900; font-size: 4ch">ALL RECEIPTS</h3>
+<hr>
 
-
-    <br>
-    {% for sale in sales %}
-    <div class="card mb-3" style="background-color:white; width:50%; margin:auto; font-family:sans-serif;">
-        <div class="card-body pl-5">
-            <h6 class="">Date: {{ sale.date_of_sale }}</h6>
-            <h3 class="mt-3 text-center" style="color: #5093ab;"> Divine Touch</h3>
-            <p class="card-title mt-5">customer's Name: <span style="font-weight:bolder;"> {{ sale.payee | title }}</span></p>
-            <p class="card-text">Item Name:  <span style="font-weight:bolder;">{{ sale.name_of_the_item }}</span></p>
-            <p class="card-text">Amount Paid:<strong> UGX {{ sale.amount_received }}</strong></p>
-            <p class="card-text">Quantity: <strong>{{ sale.quantity_sold }}</strong></p>
-            <p class="card-text">profit: <strong>{{ sale.profit }}</strong></p>
-            <h4 class="mb-1 text-center" >Total Price: UGX {{ sale.total_price }}</h4><hr>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <p class="card-text">Amount Due: UGX{{ sale.change }}</p>
-                <a href="{% url 'receipt_detail' sale.id %}" class="btn btn-primary">Print Receipt</a>
-            </div>
+<br>
+{% for sale in sales %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h6>Date: {{ sale.date_of_sale }}</h6>
+        <h3 class="mt-3 text-center">Divine Touch</h3>
+        <p class="mt-5">Customer's Name: <span>{{ sale.payee | title }}</span></p>
+        <p>Item Name: <span>{{ sale.name_of_the_item }}</span></p>
+        <p>Amount Paid: <strong>UGX {{ sale.amount_received }}</strong></p>
+        <p>Quantity: <strong>{{ sale.quantity_sold }}</strong></p>
+        <p>Profit: <strong>{{ sale.profit }}</strong></p>
+        <h4 class="mb-1 text-center">Total Price: UGX {{ sale.total_price }}</h4>
+        <hr>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p>Amount Due: UGX {{ sale.change }}</p>
+            <a href="{% url 'receipt_detail' sale.id %}" class="btn btn-primary">Print Receipt</a>
         </div>
     </div>
- 
-    </div>
-    {% endfor %}
-        <a href="{% url 'item'  %}"  class="hover-button ml-5"><input type= "submit" value="Go back" class="btn btn-primary" type="button"/></a>  
+</div>
+{% endfor %}
+<a href="{% url 'item' %}" class="hover-button ml-5">
+    <input type="submit" value="Go back" class="btn btn-primary" />
+</a>  
 
 {% endblock %}
