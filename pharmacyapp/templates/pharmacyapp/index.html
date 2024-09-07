@@ -5,165 +5,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divine touch</title>
+    <title>Divine Touch</title>
     <style>
+        html,
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
             height: 100%;
             overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("{% static 'images/stock.jpg' %}") no-repeat center center;
+            background-size: cover;
+            opacity: 0.6;
+            z-index: -1;
         }
 
         .container {
+            text-align: center;
+            padding: 20px;
             position: relative;
-            text-align: left;
-            padding: 0 20px;
-        }
-
-        .daycare-image {
-            width: 100%;
-            height: auto;
-            opacity: 0.6;
+            z-index: 1;
+            max-width: 800px;
         }
 
         .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
             width: 120px;
-            height: auto;
             border-radius: 50%;
-            z-index: 2;
+            margin-bottom: 20px;
         }
 
         .tagline {
-            position: absolute;
-            top: 40%;
-            left: 20px;
-            transform: translateY(-50%);
-            z-index: 2;
-            color: #333;
-            font-size: 20px;
+            margin-bottom: 20px;
+            font-size: 22px;
             font-weight: bold;
-            max-width: 80%;
+            line-height: 1.5;
         }
 
         .tagline h1 {
-            color: #5093AB;
-            font-weight: bolder;
+            margin: 0;
+            font-size: 32px;
+            color: white;
         }
 
         .about-text {
-            margin: 50px auto;
-            max-width: 800px;
-            color: #555;
-            font-size: 16px;
-            line-height: 1.6;
+            margin: 20px auto;
+            font-size: 18px;
+            line-height: 1.8;
         }
 
         .learn-more-button {
             display: inline-block;
-            padding: 15px 30px;
-            background-color: #01b9dd;
-            color: white;
+            padding: 12px 30px;
+            background-color: #399918;
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 30px;
-            font-size: 20px;
-            transition: background-color 0.3s;
-            margin-bottom: 20px;
+            border-radius: 50px;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .learn-more-button:hover {
-            background-color: #5093AB;
+            background-color: #387F39;
+            transform: scale(1.05);
         }
 
         .footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #5093AB;
-            color: white;
+            background-color: #1a1a1a;
+            color: #ffffff;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             font-weight: bold;
+            border-top: 2px solid #00ff00;
+            opacity: 0.8;
         }
 
         /* Media Queries */
         @media (max-width: 768px) {
-            .logo {
-                width: 100px;
-                left: 10px;
-                top: 10px;
+            .tagline h1 {
+                font-size: 26px;
             }
 
-            .tagline {
-                top: 50%;
-                left: 10px;
-                font-size: 18px;
-                max-width: 90%;
-                text-align: center;
-                transform: translateY(-50%);
+            .learn-more-button {
+                padding: 10px 25px;
+                font-size: 16px;
             }
+        }
 
+        @media (max-width: 480px) {
             .tagline h1 {
                 font-size: 22px;
             }
 
             .learn-more-button {
-                padding: 12px 25px;
-                font-size: 16px;
-            }
-
-            .footer {
-                padding: 15px;
+                padding: 8px 20px;
                 font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                width: 80px;
-                left: 5px;
-                top: 5px;
-            }
-
-            .tagline {
-                top: 60%;
-                left: 5px;
-                font-size: 16px;
-                max-width: 95%;
-                text-align: center;
-                transform: translateY(-50%);
-            }
-
-            .tagline h1 {
-                font-size: 18px;
-            }
-
-            .learn-more-button {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .footer {
-                padding: 10px;
-                font-size: 12px;
             }
         }
     </style>
 </head>
 
 <body>
-
     <div class="container">
-        <img src="{% static 'images/daph.jpg' %}" alt="Divinetouch Image" class="daycare-image">
-        <img src="{% static 'images/logo.jpg' %}" alt="Divine Touch Logo" class="logo">
+        <img src="{% static 'images/logodivine.jpg' %}" alt="Divine Touch Logo" class="logo">
         <div class="tagline">
             <h1>Welcome to Divine Touch</h1>
-            Where Your Health is a Priority
-            <p>"Experience seamless healthcare management<br><br>
-            with our clinic app – your health, our commitment."</p>
+            <p>Where Your Health is a Priority</p>
+            <p class="about-text">
+                <span>"Experience seamless healthcare management with our clinic app – your health, our commitment."</span>
+            </p>
             <a href="{% url 'login' %}" class="learn-more-button">Get Started</a>
         </div>
     </div>
@@ -171,7 +138,6 @@
     <footer class="footer">
         © 2024 Divine Touch Medical Clinic. All rights reserved.
     </footer>
-
 </body>
 
 </html>

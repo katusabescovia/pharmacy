@@ -72,14 +72,26 @@ def add_to_stock(request,pk):
     return render(request,'pharmacyapp/add_to_stock.html',{'form':form,'item':item})           
 
     
+from django.shortcuts import render
+from .models import Salerecord
+
 def all_sales(request):
-    sales=Salerecord.objects.all()
-    total_expected=sum([items.total_price() for items in sales])
-    total=sum([items.amount_received for items in sales])
-    change=sum([items.change() for items in sales])
-    net=total_expected-change
+    sales = Salerecord.objects.all()
     
-    return render(request,'pharmacyapp/all_sales.html',{'sales':sales,'total':total,'change':change,'net':net,'total_expected':total_expected})
+    # Ensure that we handle None values by defaulting them to 0
+    total_expected = sum([items.total_price() or 0 for items in sales])
+    total = sum([items.amount_received or 0 for items in sales])
+    change = sum([items.change() or 0 for items in sales])
+    net = total_expected - change
+    
+    return render(request, 'pharmacyapp/all_sales.html', {
+        'sales': sales,
+        'total': total,
+        'change': change,
+        'net': net,
+        'total_expected': total_expected
+    })
+
 
 
 def issue_item(request,pk):
@@ -169,6 +181,14 @@ import plotly.express as px
 from plotly.offline import plot
 from django.shortcuts import render
 
+from django.shortcuts import render
+import pandas as pd
+import plotly.express as px
+from plotly.offline import plot
+from django.db.models import Sum, ExpressionWrapper, F, DecimalField
+from django.db.models.functions import TruncMonth
+from .models import Divine, Salerecord
+
 def home(request):
     # Expenses by day, aggregated by month for plotting
     expenses_data = (
@@ -185,8 +205,8 @@ def home(request):
     )
 
     expenses_df = pd.DataFrame(expenses_data)
-    expenses_df['date_of_stock'] = pd.to_datetime(expenses_df['date_of_stock'])
-    expenses_df['month'] = pd.to_datetime(expenses_df['month'])
+    expenses_df['date_of_stock'] = pd.to_datetime(expenses_df['date_of_stock'], errors='coerce')
+    expenses_df['month'] = pd.to_datetime(expenses_df['month'], errors='coerce')
 
     # Profits by day, aggregated by month for plotting
     profits_data = (
@@ -211,8 +231,8 @@ def home(request):
     )
 
     profits_df = pd.DataFrame(profits_data)
-    profits_df['date_of_sale'] = pd.to_datetime(profits_df['date_of_sale'])
-    profits_df['month'] = pd.to_datetime(profits_df['month'])
+    profits_df['date_of_sale'] = pd.to_datetime(profits_df['date_of_sale'], errors='coerce')
+    profits_df['month'] = pd.to_datetime(profits_df['month'], errors='coerce')
 
     # Debts by day, aggregated by month for plotting
     debts_data = (
@@ -229,8 +249,8 @@ def home(request):
     )
 
     debts_df = pd.DataFrame(debts_data)
-    debts_df['date_of_sale'] = pd.to_datetime(debts_df['date_of_sale'])
-    debts_df['month'] = pd.to_datetime(debts_df['month'])
+    debts_df['date_of_sale'] = pd.to_datetime(debts_df['date_of_sale'], errors='coerce')
+    debts_df['month'] = pd.to_datetime(debts_df['month'], errors='coerce')
 
     # Plotting
     fig_expenses = px.bar(
@@ -238,21 +258,21 @@ def home(request):
         x='date_of_stock', 
         y='total_expenses', 
         title="Daily Expenses Aggregated by Month",
-        color_discrete_sequence=['#5093ab']  # Red color theme
+        color_discrete_sequence=[' #399918']  # Red color theme
     )
     fig_profits = px.bar(
         profits_df, 
         x='date_of_sale', 
         y='total_profits', 
         title="Daily Profits Aggregated by Month",
-        color_discrete_sequence=['#5093ab']  # Red color theme
+        color_discrete_sequence=[' #399918']  # Red color theme
     )
     fig_debts = px.bar(
         debts_df, 
         x='date_of_sale', 
         y='total_debt', 
         title="Daily Debts Aggregated by Month",
-        color_discrete_sequence=['#5093ab']  # Red color theme
+        color_discrete_sequence=[' #399918']  # Red color theme
     )
 
     # Hover template
@@ -268,36 +288,36 @@ def home(request):
         yaxis_title='Total Expenses',
         xaxis=dict(
             tickformat='%d %b %Y',
-            tickvals=expenses_df['date_of_stock'],
-            ticktext=[date.strftime('%d %b %Y') for date in expenses_df['date_of_stock']]
+            tickvals=expenses_df['date_of_stock'].dropna(),  # Ensure no NaT values are passed
+            ticktext=[date.strftime('%d %b %Y') for date in expenses_df['date_of_stock'].dropna()]
         ),
-        yaxis=dict(gridcolor='LightGray'),  # Gridlines color
+        yaxis=dict(gridcolor='LightGreen'),  # Gridlines color
         plot_bgcolor='white',  # Background color
-        font=dict(size=12, color='DarkSlateGray')  # Font styling
+        font=dict(size=12, color='LimeGreen')  # Font styling
     )
     fig_profits.update_layout(
         xaxis_title='Date', 
         yaxis_title='Total Profits',
         xaxis=dict(
             tickformat='%d %b %Y',
-            tickvals=profits_df['date_of_sale'],
-            ticktext=[date.strftime('%d %b %Y') for date in profits_df['date_of_sale']]
+            tickvals=profits_df['date_of_sale'].dropna(),  # Ensure no NaT values are passed
+            ticktext=[date.strftime('%d %b %Y') for date in profits_df['date_of_sale'].dropna()]
         ),
         yaxis=dict(gridcolor='LightGray'),
         plot_bgcolor='white',
-        font=dict(size=12, color='DarkSlateGray')
+        font=dict(size=12, color='LimeGreen')
     )
     fig_debts.update_layout(
         xaxis_title='Date', 
         yaxis_title='Total Debts',
         xaxis=dict(
             tickformat='%d %b %Y',
-            tickvals=debts_df['date_of_sale'],
-            ticktext=[date.strftime('%d %b %Y') for date in debts_df['date_of_sale']]
+            tickvals=debts_df['date_of_sale'].dropna(),  # Ensure no NaT values are passed
+            ticktext=[date.strftime('%d %b %Y') for date in debts_df['date_of_sale'].dropna()]
         ),
         yaxis=dict(gridcolor='LightGray'),
         plot_bgcolor='white',
-        font=dict(size=12, color='DarkSlateGray')
+        font=dict(size=12, color='limeGreen')
     )
 
     expenses_plot = plot(fig_expenses, output_type='div')

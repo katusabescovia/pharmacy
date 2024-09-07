@@ -7,74 +7,79 @@
     .sitter-form {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        max-width: 80%; /* Adjusted for better responsiveness */
+        gap: 10px; 
+        max-width: 50%; /* Adjusted for a smaller form size */
         margin: auto;
-        border-radius: 10px;
-        padding: 15px;
+        border-radius: 8px; /* Slightly rounded corners */
+        padding: 15px; /* Adjusted padding for a more compact form */
         background-color: white;
-        border: 5px solid #5093ab;
-        box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
+        color: #387F39; 
+        border: 3px solid  #387F39; 
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: border-color 0.3s, box-shadow 0.3s;
         margin-top: 24px;
     }
 
     h4 {
-        color: #01b9dd;
+        color:#387F39;
         text-align: center;
         font-family: sans-serif;
         font-weight: bolder;
-        margin-top: 1rem;
+        margin-top: 1rem; /* Adjusted margin for better spacing */
+        font-size: 22px; /* Adjusted font size */
     }
 
     input[type="text"],
     input[type="number"],
     input[type="date"],
     select {
-        border: 2px solid #5093ab;
+        border: 2px solid #387F39;
         box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
         transition: border-color 0.3s, box-shadow 0.3s;
-        padding: 10px;
-        border-radius: 5px;
+        padding: 8px; /* Reduced padding for a more compact look */
+        border-radius: 4px;
         width: 100%;
+        font-size: 14px; /* Slightly smaller font size */
     }
 
     select[name="name_of_the_item"] {
-        border: 2px solid #5093ab;
+        border: 2px solid #387F39;
         box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.1);
-        transition: border-color 0.3s, box-shadow 0.3s; 
+        transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     label {
         font-weight: bold;
-        margin-top: 7px;
+        margin-top: 5px; /* Reduced margin for a more compact look */
         margin-bottom: 5px;
+        font-size: 14px; /* Slightly smaller font size */
     }
 
     button[type="submit"] {
-        margin-top: 8px;
-        background-color: #01b9dd;
+        margin-top: 12px; /* Spacing between inputs and button */
+        background-color: #387F39; 
+        color: white;
         color: white;
         border: none;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 16px; /* Adjusted font size */
         cursor: pointer;
         max-width: 100%;
-        height: 40px;
-        padding: 10px;
-        transition: background-color 0.8s, color 0.7s;
+        height: 40px; /* Adjusted height */
+        padding: 8px; /* Adjusted padding */
+        transition: background-color 0.3s, color 0.3s;
     }
 
     button[type="submit"]:hover {
-        background-color: #5093ab;
+        background-color: #00cc00;
     }
 
     /* Responsive styles */
     @media (max-width: 768px) {
         .sitter-form {
             grid-template-columns: 1fr; /* Stack columns vertically on smaller screens */
-            max-width: 90%; /* Adjust max-width */
-            padding: 10px;
+            max-width: 80%; /* Adjusted max-width */
+            padding: 10px; /* Adjusted padding */
         }
 
         h4 {
@@ -92,7 +97,7 @@
     @media (max-width: 576px) {
         .sitter-form {
             max-width: 100%; /* Full width on very small screens */
-            padding: 10px;
+            padding: 8px; /* Adjusted padding */
         }
 
         h4 {
@@ -107,7 +112,8 @@
     }
 </style>
 
-<h4>SELL FORM</h4><hr>
+<h4>SELL FORM</h4>
+<hr>
 <div class="container">
     <form method="POST" class="sitter-form">
         {% csrf_token %}

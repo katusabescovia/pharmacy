@@ -14,113 +14,123 @@
     <!-- Montserrat font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <style>
-      body {
-        background-color: #bebfc5;
-        font-family: 'Raleway', sans-serif;
-      }
+        body {
+            background-color: #0d0d0d; /* Dark background to match login page */
+            font-family: Arial, sans-serif;
+        }
 
-      .footer {
-        background-color: #5093ab;
-        text-align: center;
-        padding: 20px;
-        bottom: 0;
-        width: 100%;
-        font-weight: 900;
-        color: white;
-      }
+        .navbar {
+            background-color: #1a1a1a;
 
-      .navbar-dark .navbar-nav .nav-link {
-        color: white;
-        font-weight: bold;
-        font-size: 15px;
-        transition: all 0.5s;
-      }
+            border-bottom: 1px solid #00ff00; /* Dark background to match login container */
+        }
 
-      .navbar-dark .navbar-nav .nav-link:hover {
-        color: rgb(69, 65, 65);
-      }
+        .navbar-dark .navbar-nav .nav-link {
+            color: white; /* Match the login page green */
+            font-weight: bold;
+            font-size: 15px;
+           
+        }
 
-      .navbar-dark .navbar-nav .nav-item.active .nav-link {
-        text-decoration: underline;
-      }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #00cc00;
+            
+        }
 
-      .navbar-brand {
-        font-size: 25px;
-        color: white;
-        white-space: nowrap;
-      }
+        .navbar-dark .navbar-nav .nav-item.active .nav-link {
+            text-decoration: underline;
+            color: #00ff00;
+             
+        }
 
-      /* Media Queries for Responsive Design */
-
-      @media (max-width: 575.98px) {
         .navbar-brand {
-          font-size: 20px;
-        }
-
-        .navbar-nav {
-          text-align: center;
-        }
-
-        .navbar-nav .nav-item {
-          margin-bottom: 10px;
-        }
-
-        .navbar-toggler {
-          float: right;
+            font-size: 25px;
+            white-space: nowrap;
+           
         }
 
         .footer {
-          font-size: 12px;
-          padding: 10px;
-        }
-      }
-
-      @media (max-width: 767.98px) {
-        .navbar-brand {
-          font-size: 22px;
-        }
-
-        .navbar-nav .nav-link {
-          font-size: 14px;
+            background-color: #1a1a1a; /* Dark background to match login container */
+            color: white; /* Match the login page green */
+            text-align: center;
+            padding: 20px;
+            bottom: 0;
+            width: 100%;
+            font-weight: 900;
+            border-top: 1px solid #00ff00; /* Match the login page border color */
         }
 
-        .footer {
-          font-size: 14px;
-        }
-      }
+        /* Media Queries for Responsive Design */
 
-      @media (max-width: 991.98px) {
-        .navbar-brand {
-          font-size: 24px;
-        }
+        @media (max-width: 575.98px) {
+            .navbar-brand {
+                font-size: 20px;
+            }
 
-        .navbar-nav .nav-link {
-          font-size: 15px;
-        }
+            .navbar-nav {
+                text-align: center;
+            }
 
-        .footer {
-          font-size: 15px;
-        }
-      }
+            .navbar-nav .nav-item {
+                margin-bottom: 10px;
+            }
 
-      @media (max-width: 1199.98px) {
-        .navbar-brand {
-          font-size: 25px;
-        }
+            .navbar-toggler {
+                float: right;
+            }
 
-        .navbar-nav .nav-link {
-          font-size: 16px;
+            .footer {
+                font-size: 12px;
+                padding: 10px;
+            }
         }
 
-        .footer {
-          font-size: 16px;
+        @media (max-width: 767.98px) {
+            .navbar-brand {
+                font-size: 22px;
+            }
+
+            .navbar-nav .nav-link {
+                font-size: 14px;
+            }
+
+            .footer {
+                font-size: 14px;
+            }
         }
-      }
+
+        @media (max-width: 991.98px) {
+            .navbar-brand {
+                font-size: 24px;
+            }
+
+            .navbar-nav .nav-link {
+                font-size: 15px;
+            }
+
+            .footer {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 1199.98px) {
+            .navbar-brand {
+                font-size: 25px;
+            }
+
+            .navbar-nav .nav-link {
+                font-size: 16px;
+            }
+
+            .footer {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #5093ab;"> 
-        <a class="navbar-brand" href="#">Dr. Daniel Opio</a>
+    <nav class="navbar navbar-expand-lg navbar-dark"> 
+        <a class="navbar-brand" href="#" >Dr. Daniel Opio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

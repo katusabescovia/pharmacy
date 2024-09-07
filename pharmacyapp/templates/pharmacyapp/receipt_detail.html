@@ -4,81 +4,130 @@
 {% block content %}
 
 <style>
-    .card-header {
-        font-family: sans-serif;
+   
+    .card {
+        margin: auto;
+        width: 60%;
+        margin-top: 60px;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        background-color: #ffffff;
     }
 
-    button {
-        background-color: #0c356a;
+    .card-header {
+        background-color: #f3f4f6;
+        border-bottom: 1px solid #e1e4e8;
+        padding: 20px 30px;
+        text-align: center;
+        color: #333;
+    }
+
+    .card-header h5 {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 0;
+        color: #2a7f2e;
+    }
+
+    .card-header p {
+        margin: 4px 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .card-body {
+        padding: 20px 30px;
+    }
+
+    .table-responsive {
+        margin-top: 10px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th, 
+    .table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .table th {
+        background-color: #f7f8fa;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .table td {
+        color: #555;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .thank-you-note {
+        text-align: center;
+        color: #2a7f2e;
+        margin-top: 20px;
+        font-style: italic;
+        font-size: 14px;
     }
 
     .btn-primary {
-        background-color: #094f9f;
-    }
-
-    .btn {
-        background-color: #01b9dd;
-        color: white;
+        display: block;
+        width: 200px;
+        margin: 30px auto;
+        background-color: #2a7f2e;
+        color: #fff;
         border: none;
-        transition: background-color 0.7s;
-        text-decoration: none;
-        padding: 8px 16px;
+        padding: 10px 20px;
         border-radius: 4px;
-        margin-bottom: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s;
     }
 
-    .btn:hover {
-        background-color: #5093ab; /* Change to a darker shade for hover */
-    }
-
-    p {
-        font-weight: bolder;
+    .btn-primary:hover {
+        background-color: #246728;
     }
 
     /* Responsive Styles */
-    @media (max-width: 1200px) {
-        .card {
-            width: 80%;
-        }
-    }
-
     @media (max-width: 992px) {
         .card {
-            width: 90%;
-        }
-
-        .btn {
-            padding: 6px 12px;
+            width: 85%;
         }
     }
 
     @media (max-width: 768px) {
         .card {
             width: 95%;
-            margin-top: 40px;
         }
 
         .card-header h5 {
-            font-size: 18px;
-        }
-
-        .card-header p {
-            font-size: 14px;
+            font-size: 20px;
         }
 
         .table th, .table td {
-            font-size: 12px;
-        }
-
-        .btn {
-            padding: 5px 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
     }
 
     @media (max-width: 576px) {
         .card-header h5 {
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .card-header p {
@@ -86,12 +135,7 @@
         }
 
         .table th, .table td {
-            font-size: 10px;
-        }
-
-        .btn {
-            padding: 4px 8px;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .btn-primary {
@@ -104,9 +148,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="card" style="margin:auto; width:60%; margin-top:80px; font-family:sans-serif;">
+            <div class="card">
                 <div class="card-header">
-                    <h5 class="text-center" style="font-weight:bolder; color: #5093ab;">Divine Touch</h5>
+                    <h5>Divine Touch</h5>
                     <p>Iceme, Oyam, Uganda</p>
                     <p>Contact us: +256777037903</p>
                     <p>Date: {{ receipt.date_of_sale }}</p>
@@ -125,7 +169,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="font-family: sans-serif;">
+                                <tr>
                                     <td>{{ receipt.name_of_the_item | title }}</td>
                                     <td class="text-center">{{ receipt.quantity_sold }}</td>
                                     <td class="text-right">Ugx {{ receipt.total_price }}</td>
@@ -135,14 +179,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <p class="text-center" style="font-family: sans-serif; color: #5093ab;"><em>Thank you for choosing Divine Touch</em></p>
+                    <p class="thank-you-note">Thank you for choosing Divine Touch</p>
                 </div>
             </div>
         </div>
     </div>
-    <a href="{% url 'item' %}" class="hover-button">
-        <input type="submit" value="Go back" class="btn btn-primary" style="margin-bottom:20px;" type="button"/>
-    </a>
+    <a href="{% url 'item' %}" class="btn-primary">Go Back</a>
 </div>
 
 {% endblock %}
